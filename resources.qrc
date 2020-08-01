@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/img_x1">
+        <file>images/hero/hero_1/heros.png</file>
+        <file>images/hero/hero_1/hero0.png</file>
+        <file>images/hero/hero_1/hero1.png</file>
+        <file>images/hero/hero_1/hero2.png</file>
+    </qresource>
+    <qresource prefix="/img_x2">
+        <file>images/hero/hero_2/hero0.png</file>
+        <file>images/hero/hero_2/hero1.png</file>
+        <file>images/hero/hero_2/hero2.png</file>
+    </qresource>
+</RCC>
