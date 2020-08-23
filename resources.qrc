@@ -10,4 +10,9 @@
         <file>images/hero/hero_2/hero1.png</file>
         <file>images/hero/hero_2/hero2.png</file>
     </qresource>
+    <qresource prefix="/environment">
+        <file>images/environment/grass1.png</file>
+        <file>images/environment/grass2.png</file>
+        <file>images/environment/grass3.png</file>
+    </qresource>
 </RCC>

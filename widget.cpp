@@ -1,6 +1,7 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include "player.h"
+#include "gamesettings.h"
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -14,11 +15,10 @@ Widget::Widget(QWidget *parent) :
     m_scene->addLine(0, -200, 0, 200, QPen(QColor(Qt::red)));
     m_scene->addLine(0, 0, 500, 0, QPen(QColor(Qt::red)));
 
-    player->setPos(0,0);
-
     m_view = new QGraphicsView(this);
     m_view->setScene(m_scene);
     ui->verticalLayout->addWidget(m_view);
+    GameSettings::instance().debug();
 }
 
 Widget::~Widget()
