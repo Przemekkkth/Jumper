@@ -3,11 +3,17 @@
 #include <QString>
 #include <QSize>
 
+class QWidget;
+
 class GameSettings
 {
 public:
     static GameSettings& instance();
     static void debug();
+    static QSize resolutionSize();
+    static QSize proportionSize();
+    static QSize unitSize();
+    static void setShowMode(QWidget* widget);
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;
@@ -23,7 +29,7 @@ private:
     static QSize sUnitSize;
     static int sUnitSizeWidth;
     static int sUnitSizeHeight;
-
+    static bool sFullScreen;
     static void init();
 };
 

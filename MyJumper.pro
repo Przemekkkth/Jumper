@@ -28,15 +28,16 @@ SOURCES += \
         gamesettings.cpp \
         main.cpp \
         player.cpp \
-        widget.cpp
+        scene.cpp \
+        view.cpp
 
 HEADERS += \
         gamesettings.h \
         player.h \
-        widget.h
+        scene.h \
+        view.h
 
-FORMS += \
-        widget.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,6 +1,7 @@
 #include "gamesettings.h"
 #include <QStringList>
 #include <QDebug>
+#include <QWidget>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -13,6 +14,7 @@ int GameSettings::sProportionHeight;
 QSize GameSettings::sUnitSize;
 int GameSettings::sUnitSizeWidth;
 int GameSettings::sUnitSizeHeight;
+bool GameSettings::sFullScreen;
 
 GameSettings &GameSettings::instance()
 {
@@ -24,6 +26,32 @@ void GameSettings::debug()
 {
     qDebug() << "Resolution: " << sResolutionStr << " Proportion: " << sProportionStr << " UnitSize: " <<
                 sUnitSize.width() << "x" << sUnitSize.height();
+}
+
+QSize GameSettings::resolutionSize()
+{
+    return sResolution;
+}
+
+QSize GameSettings::proportionSize()
+{
+    return sProportion;
+}
+
+QSize GameSettings::unitSize()
+{
+    return sUnitSize;
+}
+
+void GameSettings::setShowMode(QWidget *widget)
+{
+    if(sFullScreen)
+    {
+        widget->showFullScreen();
+    }
+    else {
+        widget->show();
+    }
 }
 
 GameSettings::GameSettings()
@@ -50,4 +78,6 @@ void GameSettings::init()
     sUnitSize = QSize( sWidth/sProportionWidth, sHeight/sProportionHeight);
     sUnitSizeWidth = sUnitSize.width();
     sUnitSizeHeight = sUnitSize.height();
+    //Others
+    sFullScreen = true;
 }
