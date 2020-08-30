@@ -4,6 +4,7 @@
 #include <QApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QDebug>
+#include <QGraphicsLineItem>
 
 Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 {
@@ -14,20 +15,24 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 #ifndef QT_NO_DEBUG
     for(int row = 0; row < GameSettings::instance().proportionSize().height(); ++row)
     {
-//        qDebug() << "x0 " << -1*GameSettings::instance().resolutionSize().width()/2 <<
-//                    " y0 " << -1*GameSettings::instance().resolutionSize().height()/2 + row*GameSettings::instance().unitSize().height()
-//                 << " x1 " << GameSettings::instance().resolutionSize().width()/2
-//                 << " y1 " << -1*row*GameSettings::instance().unitSize().height()/2 + row*GameSettings::instance().unitSize().height();
-        int offset = (row == 0 ? 1 : 0) || (row == GameSettings::instance().proportionSize().height() ? -1 : 0);
-        addLine(-1*GameSettings::instance().resolutionSize().width()/2,
+        QGraphicsLineItem* line = addLine(-1*GameSettings::instance().resolutionSize().width()/2,
                 -1*GameSettings::instance().resolutionSize().height()/2 + row*GameSettings::instance().unitSize().height(), // (x0, y0)
                 GameSettings::instance().resolutionSize().width()/2,
                 -1*GameSettings::instance().resolutionSize().height()/2 + row*GameSettings::instance().unitSize().height(),    // (x1,y1)
                 QPen(QColor(Qt::blue)));                                    // color
+        qDebug() << "row: " << row;
+        GameSettings::instance().debugGraphicsLineItem(line);
+
     }
     for(int column = 0; column < GameSettings::instance().proportionSize().width(); ++column)
     {
-
+        QGraphicsLineItem* line = addLine(-1*GameSettings::instance().resolutionSize().width()/2 + column*GameSettings::instance().unitSize().width(),
+                -1*GameSettings::instance().resolutionSize().height()/2,
+                -1*GameSettings::instance().resolutionSize().width()/2 + column*GameSettings::instance().unitSize().width(),
+                1*GameSettings::instance().resolutionSize().height()/2,
+                QPen(QColor(Qt::blue)));
+        qDebug() << "column: " << column;
+        GameSettings::instance().debugGraphicsLineItem(line);
     }
     addLine(0, -1*GameSettings::instance().resolutionSize().height()/2, // (x0, y0)
             0, GameSettings::instance().resolutionSize().height()/2,    // (x1,y1)

@@ -2,7 +2,7 @@
 #define GAMESETTINGS_H
 #include <QString>
 #include <QSize>
-
+class QGraphicsLineItem;
 class QWidget;
 
 class GameSettings
@@ -14,6 +14,7 @@ public:
     static QSize proportionSize();
     static QSize unitSize();
     static void setShowMode(QWidget* widget);
+    static void debugGraphicsLineItem(QGraphicsLineItem* line);
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;

@@ -2,6 +2,7 @@
 #include <QStringList>
 #include <QDebug>
 #include <QWidget>
+#include <QGraphicsLineItem>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -52,6 +53,11 @@ void GameSettings::setShowMode(QWidget *widget)
     else {
         widget->show();
     }
+}
+
+void GameSettings::debugGraphicsLineItem(QGraphicsLineItem *line)
+{
+    qDebug() << "Vert Lines: (" << line->line().x1() << "," << line->line().y1() << "), (" << line->line().x2() << ", " << line->line().y2() << ")";
 }
 
 GameSettings::GameSettings()
