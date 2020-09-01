@@ -12,9 +12,9 @@ QString GameSettings::sProportionStr;
 QSize GameSettings::sProportion;
 int GameSettings::sProportionWidth;
 int GameSettings::sProportionHeight;
-QSize GameSettings::sUnitSize;
-int GameSettings::sUnitSizeWidth;
-int GameSettings::sUnitSizeHeight;
+QSizeF GameSettings::sUnitSize;
+qreal GameSettings::sUnitSizeWidth;
+qreal GameSettings::sUnitSizeHeight;
 bool GameSettings::sFullScreen;
 
 GameSettings &GameSettings::instance()
@@ -39,7 +39,7 @@ QSize GameSettings::proportionSize()
     return sProportion;
 }
 
-QSize GameSettings::unitSize()
+QSizeF GameSettings::unitSize()
 {
     return sUnitSize;
 }
@@ -81,7 +81,7 @@ void GameSettings::init()
     sProportion = QSize(propWidth, propHeight);
     sProportionWidth = sProportion.width();
     sProportionHeight = sProportion.height();
-    sUnitSize = QSize( sWidth/sProportionWidth, sHeight/sProportionHeight);
+    sUnitSize = QSizeF( qreal(sWidth)/qreal(sProportionWidth), qreal(sHeight)/qreal(sProportionHeight));
     sUnitSizeWidth = sUnitSize.width();
     sUnitSizeHeight = sUnitSize.height();
     //Others

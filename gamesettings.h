@@ -12,7 +12,7 @@ public:
     static void debug();
     static QSize resolutionSize();
     static QSize proportionSize();
-    static QSize unitSize();
+    static QSizeF unitSize();
     static void setShowMode(QWidget* widget);
     static void debugGraphicsLineItem(QGraphicsLineItem* line);
 private:
@@ -27,9 +27,9 @@ private:
     static QSize sProportion;
     static int sProportionWidth;
     static int sProportionHeight;
-    static QSize sUnitSize;
-    static int sUnitSizeWidth;
-    static int sUnitSizeHeight;
+    static QSizeF sUnitSize;
+    static qreal sUnitSizeWidth;
+    static qreal sUnitSizeHeight;
     static bool sFullScreen;
     static void init();
 };
