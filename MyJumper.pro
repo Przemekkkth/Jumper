@@ -26,15 +26,19 @@ CONFIG += c++11
 
 SOURCES += \
         gamesettings.cpp \
+        ground.cpp \
         main.cpp \
         player.cpp \
         scene.cpp \
+        sky.cpp \
         view.cpp
 
 HEADERS += \
         gamesettings.h \
+        ground.h \
         player.h \
         scene.h \
+        sky.h \
         view.h
 
 FORMS +=

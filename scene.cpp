@@ -1,6 +1,9 @@
 #include "scene.h"
 #include "gamesettings.h"
 #include "player.h"
+#include "ground.h"
+#include "sky.h"
+
 #include <QKeyEvent>
 #include <QApplication>
 #include <QGraphicsSceneMouseEvent>
@@ -10,12 +13,12 @@
 
 Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 {
-    int w_Resolution = GameSettings::instance().resolutionSize().width();
-    int h_Resolution = GameSettings::instance().resolutionSize().height();
-    int w_Proportion = GameSettings::instance().proportionSize().width();
-    int h_Proportion = GameSettings::instance().proportionSize().height();
-    qreal w_Unit = GameSettings::instance().unitSize().width();
-    qreal h_Unit = GameSettings::instance().unitSize().height();
+    w_Resolution = GameSettings::instance().resolutionSize().width();
+    h_Resolution = GameSettings::instance().resolutionSize().height();
+    w_Proportion = GameSettings::instance().proportionSize().width();
+    h_Proportion = GameSettings::instance().proportionSize().height();
+    w_Unit = GameSettings::instance().unitSize().width();
+    h_Unit = GameSettings::instance().unitSize().height();
     setSceneRect(-1*w_Resolution/2,    //x0->mi
                  -1*h_Resolution/2,   //y0
                  w_Resolution,         //w0
@@ -63,6 +66,27 @@ void Scene::init()
     mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
     mPlayer->setPos(0,0);
     addItem(mPlayer);
+}
+
+void Scene::createEnvironment()
+{
+
+    //init ground
+    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
+    {
+        mGrounds.push_back(new Ground());
+        addItem(mGrounds[i]);
+    }
+    //set pos for groundTiles
+    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
+    {
+        mGrounds[i]->setPos(QPointF(-w_Resolution/2 + i*w_Unit - w_Unit, h_Resolution/2 - h_Unit));
+    }
+
+    //init sky
+    mSky = new Sky();
+    addItem(mSky);
+    mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)
