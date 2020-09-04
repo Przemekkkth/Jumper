@@ -11,9 +11,9 @@ class Scene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit Scene(QObject *parent = nullptr);
-    void init();
     void createEnvironment();
-
+    void createPlayer();
+    void debug();
 signals:
     void setCenterOn(const QPointF pos);
 public slots:

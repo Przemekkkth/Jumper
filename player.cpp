@@ -1,4 +1,5 @@
 #include "player.h"
+#include "gamesettings.h"
 #include <QFileInfo>
 #include <QDebug>
 #include <QTimer>
@@ -8,7 +9,7 @@ const int Player::m_countFrames = 3;
 
 Player::Player(QString pathFile)
 {
-    setPixmap(pathFile);
+    setPixmap(QPixmap(pathFile).scaled(int(boundingRect().width()), int(boundingRect().height()) ) );
     m_pathFile = QFileInfo(pathFile).path();
     m_fileName = QFileInfo(pathFile).fileName();
     //find frame number ex. hero0.png
@@ -47,4 +48,10 @@ void Player::updatePixmap()
 int Player::frames()
 {
     return m_countFrames;
+}
+
+
+QRectF Player::boundingRect() const
+{
+    return QRectF(0, 0, GameSettings::instance().unitSize().width()/2, GameSettings::instance().unitSize().height());
 }

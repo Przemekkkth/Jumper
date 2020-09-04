@@ -23,6 +23,39 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  -1*h_Resolution/2,   //y0
                  w_Resolution,         //w0
                  h_Resolution);       //h0
+
+}
+
+void Scene::createEnvironment()
+{
+
+    //init ground
+    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
+    {
+        mGrounds.push_back(new Ground());
+        addItem(mGrounds[i]);
+    }
+    //set pos for groundTiles
+    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
+    {
+        mGrounds[i]->setPos(QPointF(-w_Resolution/2 + i*w_Unit - w_Unit, h_Resolution/2 - h_Unit));
+    }
+
+    //init sky
+    mSky = new Sky();
+    addItem(mSky);
+    mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
+}
+
+void Scene::createPlayer()
+{
+    mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
+    mPlayer->setPos(0,0);
+    addItem(mPlayer);
+}
+
+void Scene::debug()
+{
 #ifndef QT_NO_DEBUG
     for(int row = 0; row < h_Proportion; ++row)
     {
@@ -59,34 +92,6 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
         }
     }
 #endif
-}
-
-void Scene::init()
-{
-    mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
-    mPlayer->setPos(0,0);
-    addItem(mPlayer);
-}
-
-void Scene::createEnvironment()
-{
-
-    //init ground
-    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
-    {
-        mGrounds.push_back(new Ground());
-        addItem(mGrounds[i]);
-    }
-    //set pos for groundTiles
-    for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
-    {
-        mGrounds[i]->setPos(QPointF(-w_Resolution/2 + i*w_Unit - w_Unit, h_Resolution/2 - h_Unit));
-    }
-
-    //init sky
-    mSky = new Sky();
-    addItem(mSky);
-    mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)

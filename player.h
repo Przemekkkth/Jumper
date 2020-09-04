@@ -21,6 +21,10 @@ private:
     QString m_pathFile;
     QString m_fileName;
     QTimer* m_timer;
+
+    // QGraphicsItem interface
+public:
+    virtual QRectF boundingRect() const override;
 };
 
 #endif // PLAYER_H

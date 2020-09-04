@@ -13,9 +13,10 @@ int main(int argc, char *argv[])
 //    GameSettings::instance().setShowMode(&w);
     View *v = new View();
     Scene* s = new Scene(v);
-    s->init();
     s->createEnvironment();
+    s->createPlayer();
     v->setScene(s);
+    s->debug();
     GameSettings::instance().setShowMode(v);
     GameSettings::instance().debug();
     return a.exec();
