@@ -50,7 +50,8 @@ void Scene::createEnvironment()
 void Scene::createPlayer()
 {
     mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
-    mPlayer->setPos(0,0);
+    mPlayer->setPos(-w_Resolution/2+3*w_Unit,h_Resolution/2-2*h_Unit);
+    //mPlayer->setPos(0,0);
     addItem(mPlayer);
 }
 
@@ -101,9 +102,17 @@ void Scene::keyPressEvent(QKeyEvent *event)
     {
         QApplication::instance()->quit();
     }
-    if(event->key() == Qt::Key_Left || event->key() == Qt::Key_Right || event->key() == Qt::Key_Up || event->key() == Qt::Key_Down)
+    else if(event->key() == Qt::Key_Left || event->key() == Qt::Key_Right || event->key() == Qt::Key_Up || event->key() == Qt::Key_Down)
     {
 
+    }
+    else if( event->key() == Qt::Key_Space)
+    {
+        qDebug() << "jump";
+        if(!mPlayer->isJumping())
+        {
+            mPlayer->jump();
+        }
     }
     else
     {

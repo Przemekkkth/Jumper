@@ -9,6 +9,7 @@
         <file>images/hero/hero_2/hero0.png</file>
         <file>images/hero/hero_2/hero1.png</file>
         <file>images/hero/hero_2/hero2.png</file>
+        <file>images/hero/hero_2/hero_jump.png</file>
     </qresource>
     <qresource prefix="/environment">
         <file>images/environment/grass1.png</file>
