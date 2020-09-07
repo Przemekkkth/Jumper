@@ -76,7 +76,7 @@ void Player::jump()
     mIsJumping = true;
     mJumpUpAnim->setStartValue(y());
     mJumpUpAnim->setEndValue(y() - GameSettings::instance().unitSize().height());
-    mJumpUpAnim->setEasingCurve(QEasingCurve::InQuad);
+    mJumpUpAnim->setEasingCurve(QEasingCurve::OutQuad);
     mJumpUpAnim->setDuration(250);
     mJumpUpAnim->start();
     connect(mJumpUpAnim, &QPropertyAnimation::finished, [this](){

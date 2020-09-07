@@ -3,6 +3,7 @@
 #include "player.h"
 #include "ground.h"
 #include "sky.h"
+#include "cactus.h"
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -45,6 +46,10 @@ void Scene::createEnvironment()
     mSky = new Sky();
     addItem(mSky);
     mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
+    //cactus
+    Cactus* cactus = new Cactus();
+    cactus->setPos(QPointF(-w_Resolution/2 + 10*w_Unit - w_Unit, h_Resolution/2 - h_Unit - cactus->height()));
+    addItem(cactus);
 }
 
 void Scene::createPlayer()

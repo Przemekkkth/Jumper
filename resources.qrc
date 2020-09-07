@@ -16,5 +16,6 @@
         <file>images/environment/grass2.png</file>
         <file>images/environment/grass3.png</file>
         <file>images/environment/sky.png</file>
+        <file>images/environment/cactus1.png</file>
     </qresource>
 </RCC>

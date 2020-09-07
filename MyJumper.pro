@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        cactus.cpp \
         gamesettings.cpp \
         ground.cpp \
         main.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         view.cpp
 
 HEADERS += \
+        cactus.h \
         gamesettings.h \
         ground.h \
         player.h \
