@@ -17,7 +17,7 @@ public:
 signals:
     void setCenterOn(const QPointF pos);
 public slots:
-
+    void setUpCactusSpawner();
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
@@ -33,6 +33,7 @@ private:
     int h_Proportion;
     qreal w_Unit;
     qreal h_Unit;
+    QTimer *mCactusTimer;
 };
 
 #endif // SCENE_H

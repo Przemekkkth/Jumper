@@ -17,8 +17,16 @@ public:
 public slots:
     void setX(qreal x);
 private:
+    static const int TIME_OF_THE_ROAD;
+
+    bool collideWithPlayer();
+
     QPropertyAnimation* mX_MovementAnim;
     qreal m_x;
+    int m_xRandomizer;
+
+signals:
+    void collidedWithPlayer();
 };
 
 #endif // CACTUS_H

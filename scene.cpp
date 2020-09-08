@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QGraphicsLineItem>
 #include <QGraphicsSimpleTextItem>
+#include <QTimer>
 
 Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 {
@@ -24,7 +25,9 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  -1*h_Resolution/2,   //y0
                  w_Resolution,         //w0
                  h_Resolution);       //h0
-
+    mCactusTimer = new QTimer(this);
+    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+    mCactusTimer->start(1000);
 }
 
 void Scene::createEnvironment()
@@ -98,6 +101,12 @@ void Scene::debug()
         }
     }
 #endif
+}
+
+void Scene::setUpCactusSpawner()
+{
+    Cactus* catus = new Cactus();
+    addItem(catus);
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)
