@@ -24,6 +24,8 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void wheelEvent(QGraphicsSceneWheelEvent *event) override;
 private:
+    static const int CACTUST_SPAWN_TIMER;
+
     Player* mPlayer;
     QVector<Ground*> mGrounds;
     Sky* mSky;

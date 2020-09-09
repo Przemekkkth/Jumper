@@ -17,6 +17,8 @@ public:
     void jump();
     void fall();
     qreal y() const;
+    void freeze();
+    void unFreeze();
 signals:
 
 public slots:

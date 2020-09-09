@@ -13,6 +13,8 @@
 #include <QGraphicsSimpleTextItem>
 #include <QTimer>
 
+ const int Scene::CACTUST_SPAWN_TIMER = 1000;
+
 Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 {
     w_Resolution = GameSettings::instance().resolutionSize().width();
@@ -27,7 +29,7 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  h_Resolution);       //h0
     mCactusTimer = new QTimer(this);
     connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
-    mCactusTimer->start(1000);
+    mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
 void Scene::createEnvironment()
@@ -105,8 +107,12 @@ void Scene::debug()
 
 void Scene::setUpCactusSpawner()
 {
-    Cactus* catus = new Cactus();
-    addItem(catus);
+    Cactus* cactus = new Cactus();
+    connect(cactus, &Cactus::collidedWithPlayer, [this](){
+        this->mPlayer->freeze();
+        this->mCactusTimer->stop();
+    });
+    addItem(cactus);
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)

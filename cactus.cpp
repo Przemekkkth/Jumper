@@ -50,6 +50,10 @@ void Cactus::setX(qreal x)
 {
     qreal yPos = y();
     m_x = x;
+    if(collideWithPlayer())
+    {
+        emit collidedWithPlayer();
+    }
     setPos(QPointF(0,0) + QPointF(m_x, yPos));
 }
 
@@ -61,9 +65,8 @@ bool Cactus::collideWithPlayer()
         if(player)
         {
             qDebug() << "Cactus collides with Player";
-            emit collidedWithPlayer();
             return true;
         }
     }
-    return
+    return false;
 }

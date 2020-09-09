@@ -101,6 +101,19 @@ qreal Player::y() const
     return m_y;
 }
 
+void Player::freeze()
+{
+    m_timer->stop();
+    mJumpUpAnim->stop();
+    mJumpDownAnim->stop();
+    mIsJumping = false;
+}
+
+void Player::unFreeze()
+{
+    m_timer->start();
+}
+
 
 QRectF Player::boundingRect() const
 {
