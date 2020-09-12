@@ -36,6 +36,7 @@ private:
     qreal w_Unit;
     qreal h_Unit;
     QTimer *mCactusTimer;
+    bool mPaused;
 };
 
 #endif // SCENE_H

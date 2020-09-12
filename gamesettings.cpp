@@ -16,6 +16,7 @@ QSizeF GameSettings::sUnitSize;
 qreal GameSettings::sUnitSizeWidth;
 qreal GameSettings::sUnitSizeHeight;
 bool GameSettings::sFullScreen;
+GameSettings::State GameSettings::sState;
 
 GameSettings &GameSettings::instance()
 {
@@ -60,6 +61,20 @@ void GameSettings::debugGraphicsLineItem(QGraphicsLineItem *line)
     qDebug() << "Vert Lines: (" << line->line().x1() << "," << line->line().y1() << "), (" << line->line().x2() << ", " << line->line().y2() << ")";
 }
 
+GameSettings::State GameSettings::GameState()
+{
+    return sState;
+}
+
+void GameSettings::setGameState(GameSettings::State newState)
+{
+    if(sState == newState)
+        return;
+    else {
+        sState = newState;
+    }
+}
+
 GameSettings::GameSettings()
 {
     init();
@@ -86,4 +101,5 @@ void GameSettings::init()
     sUnitSizeHeight = sUnitSize.height();
     //Others
     sFullScreen = true;
+    sState = Stopped;
 }

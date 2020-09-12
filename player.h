@@ -19,6 +19,8 @@ public:
     qreal y() const;
     void freeze();
     void unFreeze();
+    QPropertyAnimation* getJumpUpAnim() const;
+    QPropertyAnimation* getJumpDownAnim() const;
 signals:
 
 public slots:

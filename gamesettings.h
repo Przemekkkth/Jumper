@@ -15,6 +15,9 @@ public:
     static QSizeF unitSize();
     static void setShowMode(QWidget* widget);
     static void debugGraphicsLineItem(QGraphicsLineItem* line);
+    enum State{Played, Stopped, Paused};
+    State GameState();
+    void setGameState(State newState);
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;
@@ -31,6 +34,7 @@ private:
     static qreal sUnitSizeWidth;
     static qreal sUnitSizeHeight;
     static bool sFullScreen;
+    static State sState;
     static void init();
 };
 

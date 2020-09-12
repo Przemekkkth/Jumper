@@ -27,9 +27,10 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  -1*h_Resolution/2,   //y0
                  w_Resolution,         //w0
                  h_Resolution);       //h0
+    mPaused = false;
     mCactusTimer = new QTimer(this);
-    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
-    mCactusTimer->start(CACTUST_SPAWN_TIMER);
+//    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+//    mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
 void Scene::createEnvironment()
@@ -129,10 +130,39 @@ void Scene::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_Space)
     {
         qDebug() << "jump";
-        if(!mPlayer->isJumping())
+        if(!mPlayer->isJumping() && !mPaused)
         {
+
             mPlayer->jump();
         }
+    }
+    else if( event->key() == Qt::Key_P )
+    {
+        mPaused = !mPaused;
+        if(mPaused){
+            mCactusTimer->stop();
+            if(mPlayer->isJumping())
+            {
+                mPlayer->getJumpUpAnim()->pause();
+            }
+            else {
+                mPlayer->getJumpDownAnim()->pause();
+            }
+        }
+        else {
+            mCactusTimer->start();
+            if(mPlayer->isJumping())
+            {
+                mPlayer->getJumpUpAnim()->resume();
+            }
+            else {
+                mPlayer->getJumpDownAnim()->resume();
+            }
+        }
+    }
+    else if( event->key() == Qt::Key_R)
+    {
+
     }
     else
     {

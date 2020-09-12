@@ -114,6 +114,15 @@ void Player::unFreeze()
     m_timer->start();
 }
 
+QPropertyAnimation *Player::getJumpUpAnim() const
+{
+    return mJumpUpAnim;
+}
+
+QPropertyAnimation *Player::getJumpDownAnim() const
+{
+    return mJumpDownAnim;
+}
 
 QRectF Player::boundingRect() const
 {

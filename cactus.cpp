@@ -11,7 +11,7 @@ const int Cactus::TIME_OF_THE_ROAD = 2000;
 Cactus::Cactus()
 {
     setPixmap(QPixmap(sPathFile).scaled(int(boundingRect().width()), int(boundingRect().height())));
-    m_xRandomizer = QRandomGenerator::global()->bounded(int(GameSettings::instance().unitSize().width()));
+    m_xRandomizer = QRandomGenerator::global()->bounded(int(3*GameSettings::instance().unitSize().width()));
     mX_MovementAnim = new QPropertyAnimation(this, "x", this);
     setPos(QPointF(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer,
                    GameSettings::instance().resolutionSize().height()/2 - GameSettings::instance().unitSize().height() - height()));
@@ -29,7 +29,6 @@ Cactus::Cactus()
         delete this;
     });
 }
-
 
 QRectF Cactus::boundingRect() const
 {
