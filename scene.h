@@ -24,6 +24,11 @@ protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void wheelEvent(QGraphicsSceneWheelEvent *event) override;
 private:
+    void pauseGame();
+    void resumeGame();
+    void pauseCacti();
+    void removeCacti();
+
     static const int CACTUST_SPAWN_TIMER;
 
     Player* mPlayer;
@@ -37,8 +42,6 @@ private:
     qreal h_Unit;
     QTimer *mCactusTimer;
     bool mPaused;
-    void pauseGame();
-    void resumeGame();
 };
 
 #endif // SCENE_H

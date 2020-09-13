@@ -14,6 +14,7 @@ public:
     virtual QRectF boundingRect() const override;
     qreal x() const;
     qreal height();
+    QPropertyAnimation* xMovementAnim() const;
 public slots:
     void setX(qreal x);
 private:

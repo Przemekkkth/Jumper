@@ -35,7 +35,6 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 
 void Scene::createEnvironment()
 {
-
     //init ground
     for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
     {
@@ -52,10 +51,6 @@ void Scene::createEnvironment()
     mSky = new Sky();
     addItem(mSky);
     mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
-    //cactus
-    Cactus* cactus = new Cactus();
-    cactus->setPos(QPointF(-w_Resolution/2 + 10*w_Unit - w_Unit, h_Resolution/2 - h_Unit - cactus->height()));
-    addItem(cactus);
 }
 
 void Scene::createPlayer()
@@ -110,8 +105,10 @@ void Scene::setUpCactusSpawner()
 {
     Cactus* cactus = new Cactus();
     connect(cactus, &Cactus::collidedWithPlayer, [this](){
+        GameSettings::instance().setGameState(GameSettings::State::Stopped);
         this->mPlayer->freeze();
         this->mCactusTimer->stop();
+        this->pauseCacti();
     });
     addItem(cactus);
 }
@@ -126,6 +123,33 @@ void Scene::resumeGame()
 {
     mCactusTimer->start();
     mPlayer->unFreeze();
+}
+
+void Scene::pauseCacti()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Cactus* cactus = dynamic_cast<Cactus*>(allItems[i]);
+        if( cactus )
+        {
+            cactus->xMovementAnim()->pause();
+        }
+    }
+}
+
+void Scene::removeCacti()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Cactus* cactus = dynamic_cast<Cactus*>(allItems[i]);
+        if( cactus )
+        {
+            removeItem(cactus);
+            delete cactus;
+        }
+    }
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)

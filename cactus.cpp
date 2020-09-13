@@ -45,6 +45,11 @@ qreal Cactus::height()
     return boundingRect().height();
 }
 
+QPropertyAnimation *Cactus::xMovementAnim() const
+{
+    return mX_MovementAnim;
+}
+
 void Cactus::setX(qreal x)
 {
     qreal yPos = y();
