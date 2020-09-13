@@ -101,5 +101,5 @@ void GameSettings::init()
     sUnitSizeHeight = sUnitSize.height();
     //Others
     sFullScreen = true;
-    sState = Stopped;
+    sState = Played;
 }

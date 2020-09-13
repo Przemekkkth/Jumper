@@ -116,8 +116,24 @@ void Scene::setUpCactusSpawner()
     addItem(cactus);
 }
 
+void Scene::pauseGame()
+{
+    mCactusTimer->stop();
+    mPlayer->freeze();
+}
+
+void Scene::resumeGame()
+{
+    mCactusTimer->start();
+    mPlayer->unFreeze();
+}
+
 void Scene::keyPressEvent(QKeyEvent *event)
 {
+    if( event->isAutoRepeat() )
+    {
+        return;
+    }
     qDebug() << "void Scene::keyPressEvent(QKeyEvent *event)";
     if(event->key() == Qt::Key_Escape)
     {
@@ -130,34 +146,28 @@ void Scene::keyPressEvent(QKeyEvent *event)
     else if( event->key() == Qt::Key_Space)
     {
         qDebug() << "jump";
-        if(!mPlayer->isJumping() && !mPaused)
+        if(GameSettings::GameState() == GameSettings::State::Played )
         {
+            if(!mPlayer->isJumping() )
+            {
 
-            mPlayer->jump();
+                mPlayer->jump();
+            }
         }
     }
     else if( event->key() == Qt::Key_P )
     {
-        mPaused = !mPaused;
-        if(mPaused){
-            mCactusTimer->stop();
-            if(mPlayer->isJumping())
-            {
-                mPlayer->getJumpUpAnim()->pause();
-            }
-            else {
-                mPlayer->getJumpDownAnim()->pause();
-            }
+        if( GameSettings::GameState() == GameSettings::State::Played )
+        {
+            GameSettings::setGameState(GameSettings::State::Paused);
+            qDebug() << "paused";
+            pauseGame();
         }
-        else {
-            mCactusTimer->start();
-            if(mPlayer->isJumping())
-            {
-                mPlayer->getJumpUpAnim()->resume();
-            }
-            else {
-                mPlayer->getJumpDownAnim()->resume();
-            }
+        else if(GameSettings::GameState() == GameSettings::State::Paused)
+        {
+            GameSettings::setGameState(GameSettings::State::Played);
+            qDebug() << "played";
+            resumeGame();
         }
     }
     else if( event->key() == Qt::Key_R)

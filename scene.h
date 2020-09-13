@@ -37,6 +37,8 @@ private:
     qreal h_Unit;
     QTimer *mCactusTimer;
     bool mPaused;
+    void pauseGame();
+    void resumeGame();
 };
 
 #endif // SCENE_H

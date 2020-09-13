@@ -104,14 +104,25 @@ qreal Player::y() const
 void Player::freeze()
 {
     m_timer->stop();
-    mJumpUpAnim->stop();
-    mJumpDownAnim->stop();
-    mIsJumping = false;
+    if(isJumping())
+    {
+        getJumpUpAnim()->pause();
+    }
+    else {
+        getJumpDownAnim()->pause();
+    }
 }
 
 void Player::unFreeze()
 {
     m_timer->start();
+    if(isJumping())
+    {
+        getJumpUpAnim()->resume();
+    }
+    else {
+        getJumpDownAnim()->resume();
+    }
 }
 
 QPropertyAnimation *Player::getJumpUpAnim() const
