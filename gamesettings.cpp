@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QWidget>
 #include <QGraphicsLineItem>
+#include <QFontDatabase>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -17,7 +18,9 @@ qreal GameSettings::sUnitSizeWidth;
 qreal GameSettings::sUnitSizeHeight;
 bool GameSettings::sFullScreen;
 GameSettings::State GameSettings::sState;
-
+QPointF GameSettings::sDefaultPlayerPosition;
+QFont GameSettings::sGameFont;
+int GameSettings::sGameFontDefaultSize = 25;
 GameSettings &GameSettings::instance()
 {
     static GameSettings gameSettings;
@@ -82,6 +85,11 @@ GameSettings::GameSettings()
 
 void GameSettings::init()
 {
+    //Font
+    int id = QFontDatabase::addApplicationFont(":/fonts/fonts/Blue Sky 8x8 Monospaced.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+    sGameFont.setFamily(family);
+    sGameFont.setPixelSize(sGameFontDefaultSize);
     //Resolution
     sResolutionStr = "1366x768";
     int width = sResolutionStr.split("x").at(0).toInt();
@@ -102,4 +110,6 @@ void GameSettings::init()
     //Others
     sFullScreen = true;
     sState = Played;
+    //Player
+    sDefaultPlayerPosition = QPointF(-sWidth/2+3*sUnitSizeWidth, sHeight/2-2*sUnitSizeHeight);
 }

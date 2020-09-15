@@ -4,6 +4,7 @@
 #include "ground.h"
 #include "sky.h"
 #include "cactus.h"
+#include "gametext.h"
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -31,6 +32,7 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
     mCactusTimer = new QTimer(this);
 //    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
 //    mCactusTimer->start(CACTUST_SPAWN_TIMER);
+
 }
 
 void Scene::createEnvironment()
@@ -56,9 +58,21 @@ void Scene::createEnvironment()
 void Scene::createPlayer()
 {
     mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
-    mPlayer->setPos(-w_Resolution/2+3*w_Unit,h_Resolution/2-2*h_Unit);
-    //mPlayer->setPos(0,0);
+    mPlayer->setPos( GameSettings::instance().sDefaultPlayerPosition );
     addItem(mPlayer);
+}
+
+void Scene::createUI()
+{
+    mPauseText = new GameText("Press P to resume");
+    addItem(mPauseText);
+    mPauseText->setPos(QPointF(-w_Resolution/2+w_Unit*(w_Proportion/2)-3*w_Unit, -h_Resolution/2+h_Unit));
+    mPauseText->hide();
+
+    mStopText = new GameText("Press R to start");
+    addItem(mStopText);
+    mStopText->setPos(QPointF(-w_Resolution/2+w_Unit*(w_Proportion/2)-3*w_Unit, -h_Resolution/2+h_Unit));
+    mStopText->hide();
 }
 
 void Scene::debug()
@@ -117,12 +131,14 @@ void Scene::pauseGame()
 {
     mCactusTimer->stop();
     mPlayer->freeze();
+    mPauseText->show();
 }
 
 void Scene::resumeGame()
 {
     mCactusTimer->start();
     mPlayer->unFreeze();
+    mPauseText->hide();
 }
 
 void Scene::pauseCacti()

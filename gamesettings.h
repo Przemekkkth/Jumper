@@ -2,6 +2,9 @@
 #define GAMESETTINGS_H
 #include <QString>
 #include <QSize>
+#include <QPointF>
+#include <QFont>
+
 class QGraphicsLineItem;
 class QWidget;
 
@@ -18,6 +21,9 @@ public:
     enum State{Played, Stopped, Paused};
     static State GameState();
     static void setGameState(State newState);
+    static QPointF sDefaultPlayerPosition;
+    static QFont sGameFont;
+    static int sGameFontDefaultSize;
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;

@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     Scene* s = new Scene(v);
     s->createEnvironment();
     s->createPlayer();
+    s->createUI();
     v->setScene(s);
     s->debug();
     GameSettings::instance().setShowMode(v);

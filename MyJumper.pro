@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         cactus.cpp \
         gamesettings.cpp \
+        gametext.cpp \
         ground.cpp \
         main.cpp \
         player.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 HEADERS += \
         cactus.h \
         gamesettings.h \
+        gametext.h \
         ground.h \
         player.h \
         scene.h \

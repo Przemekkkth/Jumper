@@ -18,4 +18,7 @@
         <file>images/environment/sky.png</file>
         <file>images/environment/cactus1.png</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/Blue Sky 8x8 Monospaced.ttf</file>
+    </qresource>
 </RCC>
