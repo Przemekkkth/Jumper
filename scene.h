@@ -27,6 +27,7 @@ protected:
 private:
     void pauseGame();
     void resumeGame();
+    void restartGame();
     void pauseCacti();
     void removeCacti();
 

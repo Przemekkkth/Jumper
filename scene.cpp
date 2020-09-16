@@ -30,8 +30,8 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  h_Resolution);       //h0
     mPaused = false;
     mCactusTimer = new QTimer(this);
-//    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
-//    mCactusTimer->start(CACTUST_SPAWN_TIMER);
+    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+    mCactusTimer->start(CACTUST_SPAWN_TIMER);
 
 }
 
@@ -123,6 +123,7 @@ void Scene::setUpCactusSpawner()
         this->mPlayer->freeze();
         this->mCactusTimer->stop();
         this->pauseCacti();
+        this->mStopText->show();
     });
     addItem(cactus);
 }
@@ -139,6 +140,14 @@ void Scene::resumeGame()
     mCactusTimer->start();
     mPlayer->unFreeze();
     mPauseText->hide();
+}
+
+void Scene::restartGame()
+{
+    removeCacti();
+    mCactusTimer->start();
+    mPlayer->unFreeze();
+    mStopText->hide();
 }
 
 void Scene::pauseCacti()
@@ -190,7 +199,6 @@ void Scene::keyPressEvent(QKeyEvent *event)
         {
             if(!mPlayer->isJumping() )
             {
-
                 mPlayer->jump();
             }
         }
@@ -212,7 +220,11 @@ void Scene::keyPressEvent(QKeyEvent *event)
     }
     else if( event->key() == Qt::Key_R)
     {
-
+        if(GameSettings::GameState() == GameSettings::State::Stopped )
+        {
+            GameSettings::setGameState(GameSettings::State::Played);
+            restartGame();
+        }
     }
     else
     {

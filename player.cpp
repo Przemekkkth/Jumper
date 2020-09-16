@@ -106,10 +106,27 @@ void Player::freeze()
     m_timer->stop();
     if(isJumping())
     {
-        getJumpUpAnim()->pause();
+        qDebug() << "Jumping getJumpUpAnim()->currentTime() " << getJumpUpAnim()->currentTime();
+        qDebug() << "getJumpUpAnim totalTime " << getJumpUpAnim()->totalDuration();
+        if(getJumpUpAnim()->currentTime() != 0 && getJumpUpAnim()->currentTime() != getJumpUpAnim()->totalDuration() )
+        {
+            getJumpUpAnim()->pause();
+        }
+        else {
+            getJumpUpAnim()->stop();
+        }
     }
     else {
-        getJumpDownAnim()->pause();
+        qDebug() << "Not Jumping getJumpDownAnim()->currentTime() " << getJumpDownAnim()->currentTime();
+        qDebug() << "getJumpDownAnim totalTime " << getJumpDownAnim()->totalDuration();
+        if(getJumpDownAnim()->currentTime() != 0 && getJumpDownAnim()->currentTime() != getJumpDownAnim()->totalDuration() )
+        {
+            //qDebug() << "downAnim"
+            getJumpDownAnim()->pause();
+        }
+        else {
+            getJumpDownAnim()->stop();
+        }
     }
 }
 
