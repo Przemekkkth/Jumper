@@ -30,9 +30,8 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  h_Resolution);       //h0
     mPaused = false;
     mCactusTimer = new QTimer(this);
-    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
-    mCactusTimer->start(CACTUST_SPAWN_TIMER);
-
+    //connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+    //mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
 void Scene::createEnvironment()
@@ -133,10 +132,12 @@ void Scene::pauseGame()
     mCactusTimer->stop();
     mPlayer->freeze();
     mPauseText->show();
+    pauseCacti();
 }
 
 void Scene::resumeGame()
 {
+    resumeCacti();
     mCactusTimer->start();
     mPlayer->unFreeze();
     mPauseText->hide();
@@ -159,6 +160,19 @@ void Scene::pauseCacti()
         if( cactus )
         {
             cactus->xMovementAnim()->pause();
+        }
+    }
+}
+
+void Scene::resumeCacti()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Cactus* cactus = dynamic_cast<Cactus*>(allItems[i]);
+        if( cactus )
+        {
+            cactus->xMovementAnim()->resume();
         }
     }
 }

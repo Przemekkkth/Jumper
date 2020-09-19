@@ -29,6 +29,7 @@ private:
     void resumeGame();
     void restartGame();
     void pauseCacti();
+    void resumeCacti();
     void removeCacti();
 
     static const int CACTUST_SPAWN_TIMER;

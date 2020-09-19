@@ -104,41 +104,26 @@ qreal Player::y() const
 void Player::freeze()
 {
     m_timer->stop();
-    if(isJumping())
+    if(mJumpUpAnim->currentTime() > 0 && mJumpUpAnim->currentTime() < mJumpUpAnim->totalDuration() )
     {
-        qDebug() << "Jumping getJumpUpAnim()->currentTime() " << getJumpUpAnim()->currentTime();
-        qDebug() << "getJumpUpAnim totalTime " << getJumpUpAnim()->totalDuration();
-        if(getJumpUpAnim()->currentTime() != 0 && getJumpUpAnim()->currentTime() != getJumpUpAnim()->totalDuration() )
-        {
-            getJumpUpAnim()->pause();
-        }
-        else {
-            getJumpUpAnim()->stop();
-        }
+        mJumpUpAnim->pause();
     }
-    else {
-        qDebug() << "Not Jumping getJumpDownAnim()->currentTime() " << getJumpDownAnim()->currentTime();
-        qDebug() << "getJumpDownAnim totalTime " << getJumpDownAnim()->totalDuration();
-        if(getJumpDownAnim()->currentTime() != 0 && getJumpDownAnim()->currentTime() != getJumpDownAnim()->totalDuration() )
-        {
-            //qDebug() << "downAnim"
-            getJumpDownAnim()->pause();
-        }
-        else {
-            getJumpDownAnim()->stop();
-        }
+    if(mJumpDownAnim->currentTime() > 0 && mJumpDownAnim->currentTime() < mJumpDownAnim->totalDuration() )
+    {
+        mJumpDownAnim->pause();
     }
 }
 
 void Player::unFreeze()
 {
     m_timer->start();
-    if(isJumping())
+    if(mJumpUpAnim->currentTime() > 0 && mJumpUpAnim->currentTime() < mJumpUpAnim->totalDuration() )
     {
-        getJumpUpAnim()->resume();
+        mJumpUpAnim->resume();
     }
-    else {
-        getJumpDownAnim()->resume();
+    if(mJumpDownAnim->currentTime() > 0 && mJumpDownAnim->currentTime() < mJumpDownAnim->totalDuration() )
+    {
+        mJumpDownAnim->resume();
     }
 }
 
