@@ -19,6 +19,7 @@ public:
     qreal y() const;
     void freeze();
     void unFreeze();
+    void reset();
     QPropertyAnimation* getJumpUpAnim() const;
     QPropertyAnimation* getJumpDownAnim() const;
 signals:
@@ -29,6 +30,7 @@ public slots:
 private:
     int m_frame;
     static const int m_countFrames;
+    static const int sChangeFramesMilliseconds;
     QString m_pathFile;
     QString m_fileName;
     QTimer* m_timer;

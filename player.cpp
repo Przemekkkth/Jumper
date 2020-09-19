@@ -6,6 +6,7 @@
 #include <QDir>
 
 const int Player::m_countFrames = 3;
+const int Player::sChangeFramesMilliseconds = 250;
 
 Player::Player(QString pathFile)
 {
@@ -26,7 +27,7 @@ Player::Player(QString pathFile)
     qDebug() << m_frame;
     m_timer = new QTimer(this);
     connect(m_timer, &QTimer::timeout, this, &Player::updatePixmap);
-    m_timer->start(250);
+    m_timer->start(sChangeFramesMilliseconds);
 
     mJumpUpAnim = new QPropertyAnimation(this,"y",this);
     mJumpDownAnim = new QPropertyAnimation(this,"y",this);
@@ -116,7 +117,7 @@ void Player::freeze()
 
 void Player::unFreeze()
 {
-    m_timer->start();
+    m_timer->start(sChangeFramesMilliseconds);
     if(mJumpUpAnim->currentTime() > 0 && mJumpUpAnim->currentTime() < mJumpUpAnim->totalDuration() )
     {
         mJumpUpAnim->resume();
@@ -125,6 +126,14 @@ void Player::unFreeze()
     {
         mJumpDownAnim->resume();
     }
+}
+
+void Player::reset()
+{
+   m_timer->start(sChangeFramesMilliseconds);
+   mJumpUpAnim->setCurrentTime(0);
+   mJumpDownAnim->setCurrentTime(mJumpDownAnim->totalDuration());
+   mIsJumping = false;
 }
 
 QPropertyAnimation *Player::getJumpUpAnim() const

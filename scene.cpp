@@ -30,8 +30,8 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  h_Resolution);       //h0
     mPaused = false;
     mCactusTimer = new QTimer(this);
-    //connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
-    //mCactusTimer->start(CACTUST_SPAWN_TIMER);
+    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+    mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
 void Scene::createEnvironment()
@@ -147,7 +147,7 @@ void Scene::restartGame()
 {
     removeCacti();
     mCactusTimer->start();
-    mPlayer->unFreeze();
+    mPlayer->reset();
     mStopText->hide();
 }
 
