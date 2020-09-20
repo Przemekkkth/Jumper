@@ -21,6 +21,7 @@ GameSettings::State GameSettings::sState;
 QPointF GameSettings::sDefaultPlayerPosition;
 QFont GameSettings::sGameFont;
 int GameSettings::sGameFontDefaultSize = 25;
+
 GameSettings &GameSettings::instance()
 {
     static GameSettings gameSettings;

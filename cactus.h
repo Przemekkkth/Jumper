@@ -25,7 +25,8 @@ private:
     QPropertyAnimation* mX_MovementAnim;
     qreal m_x;
     int m_xRandomizer;
-
+    bool mPastPlayer;
+    static const int SCORE_POINTS;
 signals:
     void collidedWithPlayer();
 };

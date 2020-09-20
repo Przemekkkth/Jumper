@@ -1,6 +1,7 @@
 #include "cactus.h"
 #include "gamesettings.h"
 #include "player.h"
+#include "scene.h"
 
 #include <QRandomGenerator>
 #include <QGraphicsScene>
@@ -8,6 +9,8 @@
 
 QString Cactus::sPathFile = ":/environment/images/environment/cactus1.png";
 const int Cactus::TIME_OF_THE_ROAD = 2000;
+const int Cactus::SCORE_POINTS = 11;
+
 Cactus::Cactus()
 {
     setPixmap(QPixmap(sPathFile).scaled(int(boundingRect().width()), int(boundingRect().height())));
@@ -28,6 +31,7 @@ Cactus::Cactus()
         }
         delete this;
     });
+    mPastPlayer = false;
 }
 
 QRectF Cactus::boundingRect() const
@@ -57,6 +61,16 @@ void Cactus::setX(qreal x)
     if(collideWithPlayer())
     {
         emit collidedWithPlayer();
+    }
+    if( !mPastPlayer && pos().x() < GameSettings::instance().sDefaultPlayerPosition.x() )
+    {
+        mPastPlayer = true;
+        Scene* tmpScene = dynamic_cast<Scene*>(scene());
+        if(tmpScene)
+        {
+            tmpScene->addScore(SCORE_POINTS);
+        }
+
     }
     setPos(QPointF(0,0) + QPointF(m_x, yPos));
 }

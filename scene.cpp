@@ -29,6 +29,7 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
                  w_Resolution,         //w0
                  h_Resolution);       //h0
     mPaused = false;
+    mScore = 0;
     mCactusTimer = new QTimer(this);
     connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
     mCactusTimer->start(CACTUST_SPAWN_TIMER);
@@ -72,6 +73,11 @@ void Scene::createUI()
     addItem(mStopText);
     mStopText->setPos(QPointF(-w_Resolution/2+w_Unit*(w_Proportion/2)-3*w_Unit, -h_Resolution/2+h_Unit));
     mStopText->hide();
+
+    mScoreText = new GameText("0");
+    mScoreText->setBrush(QBrush( QColor(Qt::blue) ) );
+    mScoreText->setPos( QPointF( w_Resolution/2 - 5*w_Unit, -h_Resolution/2+h_Unit) );
+    addItem(mScoreText);
 }
 
 void Scene::debug()
@@ -149,6 +155,8 @@ void Scene::restartGame()
     mCactusTimer->start();
     mPlayer->reset();
     mStopText->hide();
+    mScoreText->setText("0");
+    mScore = 0;
 }
 
 void Scene::pauseCacti()
@@ -189,6 +197,12 @@ void Scene::removeCacti()
             delete cactus;
         }
     }
+}
+
+void Scene::addScore(int points)
+{
+    mScore += points;
+    mScoreText->setText(QString::number(mScore));
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)

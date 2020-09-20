@@ -15,6 +15,7 @@ public:
     void createPlayer();
     void createUI();
     void debug();
+    void addScore(int points);
 signals:
     void setCenterOn(const QPointF pos);
 public slots:
@@ -45,7 +46,8 @@ private:
     qreal h_Unit;
     QTimer *mCactusTimer;
     bool mPaused;
-    GameText *mPauseText, *mStopText;
+    GameText *mPauseText, *mStopText, *mScoreText;
+    int mScore;
 };
 
 #endif // SCENE_H
