@@ -1,7 +1,7 @@
 #include "cactus.h"
 #include "gamesettings.h"
 #include "player.h"
-#include "scene.h"
+#include "gamescene.h"
 
 #include <QRandomGenerator>
 #include <QGraphicsScene>
@@ -65,7 +65,7 @@ void Cactus::setX(qreal x)
     if( !mPastPlayer && pos().x() < GameSettings::instance().sDefaultPlayerPosition.x() )
     {
         mPastPlayer = true;
-        Scene* tmpScene = dynamic_cast<Scene*>(scene());
+        GameScene* tmpScene = dynamic_cast<GameScene*>(scene());
         if(tmpScene)
         {
             tmpScene->addScore(SCORE_POINTS);

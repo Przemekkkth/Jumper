@@ -31,6 +31,7 @@ SOURCES += \
         gametext.cpp \
         ground.cpp \
         main.cpp \
+        menuscene.cpp \
         player.cpp \
         sky.cpp \
         view.cpp
@@ -41,6 +42,7 @@ HEADERS += \
         gamesettings.h \
         gametext.h \
         ground.h \
+        menuscene.h \
         player.h \
         sky.h \
         view.h

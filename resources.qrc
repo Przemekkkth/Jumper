@@ -21,4 +21,11 @@
     <qresource prefix="/fonts">
         <file>fonts/Blue Sky 8x8 Monospaced.ttf</file>
     </qresource>
+    <qresource prefix="/audio">
+        <file>audio/Around the Bend 100 BPM.wav</file>
+    </qresource>
+    <qresource prefix="/sfx">
+        <file>sfx/Death01.wav</file>
+        <file>sfx/Retro_8-Bit_Game-Jump_Lift_TakeOff_07.wav</file>
+    </qresource>
 </RCC>
