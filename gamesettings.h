@@ -5,8 +5,10 @@
 #include <QPointF>
 #include <QFont>
 
+
 class QGraphicsLineItem;
 class QWidget;
+class QMediaPlayer;
 
 class GameSettings
 {
@@ -24,6 +26,9 @@ public:
     static QPointF sDefaultPlayerPosition;
     static QFont sGameFont;
     static int sGameFontDefaultSize;
+//Audio
+    static void playPlayerJumpSFX();
+    static void playPlayerDeathSFX();
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;
@@ -42,6 +47,13 @@ private:
     static bool sFullScreen;
     static State sState;
     static void init();
+//Audio
+    static QString sBGAudioFilePath;
+    static QString sJumpPlayerSFXFilePath;
+    static QString sDeathPlayerSFXFilePath;
+    static QMediaPlayer* sBGAudioMedia;
+    static QMediaPlayer* sJumpPlayerSFXMedia;
+    static QMediaPlayer* sDeathPlayerSFXMedia;
 };
 
 #endif // GAMESETTINGS_H

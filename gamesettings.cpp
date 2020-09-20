@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QGraphicsLineItem>
 #include <QFontDatabase>
+#include <QSoundEffect>
+#include <QMediaPlayer>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -21,6 +23,13 @@ GameSettings::State GameSettings::sState;
 QPointF GameSettings::sDefaultPlayerPosition;
 QFont GameSettings::sGameFont;
 int GameSettings::sGameFontDefaultSize = 25;
+//Audio
+QString GameSettings::sBGAudioFilePath = "qrc:/audio/audio/Around the Bend 100 BPM.wav";
+QString GameSettings::sJumpPlayerSFXFilePath = "qrc:/sfx/sfx/Retro_8-Bit_Game-Jump_Lift_TakeOff_07.wav";
+QString GameSettings::sDeathPlayerSFXFilePath = "qrc:/sfx/sfx/Death01.wav";
+QMediaPlayer* GameSettings::sBGAudioMedia;
+QMediaPlayer* GameSettings::sJumpPlayerSFXMedia;
+QMediaPlayer* GameSettings::sDeathPlayerSFXMedia;
 
 GameSettings &GameSettings::instance()
 {
@@ -79,6 +88,21 @@ void GameSettings::setGameState(GameSettings::State newState)
     }
 }
 
+void GameSettings::playPlayerJumpSFX()
+{
+    if (sJumpPlayerSFXMedia->state() == QMediaPlayer::PlayingState){
+        sJumpPlayerSFXMedia->setPosition(0);
+    }
+    else if (sJumpPlayerSFXMedia->state() == QMediaPlayer::StoppedState){
+        sJumpPlayerSFXMedia->play();
+    }
+}
+
+void GameSettings::playPlayerDeathSFX()
+{
+    sDeathPlayerSFXMedia->play();
+}
+
 GameSettings::GameSettings()
 {
     init();
@@ -113,4 +137,7 @@ void GameSettings::init()
     sState = Played;
     //Player
     sDefaultPlayerPosition = QPointF(-sWidth/2+3*sUnitSizeWidth, sHeight/2-2*sUnitSizeHeight);
+    //Audio
+    sJumpPlayerSFXMedia = new QMediaPlayer();
+    sJumpPlayerSFXMedia->setMedia(QUrl(sJumpPlayerSFXFilePath));
 }

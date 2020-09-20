@@ -35,6 +35,11 @@ GameScene::GameScene(QObject *parent) : QGraphicsScene (parent)
     mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
+GameScene::~GameScene()
+{
+
+}
+
 void GameScene::createEnvironment()
 {
     //init ground
@@ -228,6 +233,8 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             if(!mPlayer->isJumping() )
             {
                 mPlayer->jump();
+                    GameSettings::instance().playPlayerJumpSFX();
+
             }
         }
     }
