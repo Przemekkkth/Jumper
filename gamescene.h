@@ -6,11 +6,11 @@ class Player;
 class Ground;
 class Sky;
 class GameText;
-class Scene : public QGraphicsScene
+class GameScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit Scene(QObject *parent = nullptr);
+    explicit GameScene(QObject *parent = nullptr);
     void createEnvironment();
     void createPlayer();
     void createUI();

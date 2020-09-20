@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "gamescene.h"
 #include "gamesettings.h"
 #include "player.h"
 #include "ground.h"
@@ -14,9 +14,9 @@
 #include <QGraphicsSimpleTextItem>
 #include <QTimer>
 
- const int Scene::CACTUST_SPAWN_TIMER = 1000;
+ const int GameScene::CACTUST_SPAWN_TIMER = 1000;
 
-Scene::Scene(QObject *parent) : QGraphicsScene (parent)
+GameScene::GameScene(QObject *parent) : QGraphicsScene (parent)
 {
     w_Resolution = GameSettings::instance().resolutionSize().width();
     h_Resolution = GameSettings::instance().resolutionSize().height();
@@ -31,11 +31,11 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
     mPaused = false;
     mScore = 0;
     mCactusTimer = new QTimer(this);
-    connect(mCactusTimer, &QTimer::timeout, this, &Scene::setUpCactusSpawner);
+    connect(mCactusTimer, &QTimer::timeout, this, &GameScene::setUpCactusSpawner);
     mCactusTimer->start(CACTUST_SPAWN_TIMER);
 }
 
-void Scene::createEnvironment()
+void GameScene::createEnvironment()
 {
     //init ground
     for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
@@ -55,14 +55,14 @@ void Scene::createEnvironment()
     mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
 }
 
-void Scene::createPlayer()
+void GameScene::createPlayer()
 {
     mPlayer = new Player(":/img_x2/images/hero/hero_2/hero1.png");
     mPlayer->setPos( GameSettings::instance().sDefaultPlayerPosition );
     addItem(mPlayer);
 }
 
-void Scene::createUI()
+void GameScene::createUI()
 {
     mPauseText = new GameText("Press P to resume");
     addItem(mPauseText);
@@ -80,7 +80,7 @@ void Scene::createUI()
     addItem(mScoreText);
 }
 
-void Scene::debug()
+void GameScene::debug()
 {
 #ifndef QT_NO_DEBUG
     for(int row = 0; row < h_Proportion; ++row)
@@ -120,7 +120,7 @@ void Scene::debug()
 #endif
 }
 
-void Scene::setUpCactusSpawner()
+void GameScene::setUpCactusSpawner()
 {
     Cactus* cactus = new Cactus();
     connect(cactus, &Cactus::collidedWithPlayer, [this](){
@@ -133,7 +133,7 @@ void Scene::setUpCactusSpawner()
     addItem(cactus);
 }
 
-void Scene::pauseGame()
+void GameScene::pauseGame()
 {
     mCactusTimer->stop();
     mPlayer->freeze();
@@ -141,7 +141,7 @@ void Scene::pauseGame()
     pauseCacti();
 }
 
-void Scene::resumeGame()
+void GameScene::resumeGame()
 {
     resumeCacti();
     mCactusTimer->start();
@@ -149,7 +149,7 @@ void Scene::resumeGame()
     mPauseText->hide();
 }
 
-void Scene::restartGame()
+void GameScene::restartGame()
 {
     removeCacti();
     mCactusTimer->start();
@@ -159,7 +159,7 @@ void Scene::restartGame()
     mScore = 0;
 }
 
-void Scene::pauseCacti()
+void GameScene::pauseCacti()
 {
     QList<QGraphicsItem*> allItems = items();
     for(int i = 0; i < allItems.size(); ++i)
@@ -172,7 +172,7 @@ void Scene::pauseCacti()
     }
 }
 
-void Scene::resumeCacti()
+void GameScene::resumeCacti()
 {
     QList<QGraphicsItem*> allItems = items();
     for(int i = 0; i < allItems.size(); ++i)
@@ -185,7 +185,7 @@ void Scene::resumeCacti()
     }
 }
 
-void Scene::removeCacti()
+void GameScene::removeCacti()
 {
     QList<QGraphicsItem*> allItems = items();
     for(int i = 0; i < allItems.size(); ++i)
@@ -199,13 +199,13 @@ void Scene::removeCacti()
     }
 }
 
-void Scene::addScore(int points)
+void GameScene::addScore(int points)
 {
     mScore += points;
     mScoreText->setText(QString::number(mScore));
 }
 
-void Scene::keyPressEvent(QKeyEvent *event)
+void GameScene::keyPressEvent(QKeyEvent *event)
 {
     if( event->isAutoRepeat() )
     {
@@ -260,7 +260,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
@@ -268,7 +268,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void Scene::wheelEvent(QGraphicsSceneWheelEvent *event)
+void GameScene::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
     qDebug() << "void Scene::wheelEvent(QWheelEvent *event)";
     emit setCenterOn(QPointF(0,0));

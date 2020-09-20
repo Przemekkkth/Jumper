@@ -26,22 +26,22 @@ CONFIG += c++11
 
 SOURCES += \
         cactus.cpp \
+        gamescene.cpp \
         gamesettings.cpp \
         gametext.cpp \
         ground.cpp \
         main.cpp \
         player.cpp \
-        scene.cpp \
         sky.cpp \
         view.cpp
 
 HEADERS += \
         cactus.h \
+        gamescene.h \
         gamesettings.h \
         gametext.h \
         ground.h \
         player.h \
-        scene.h \
         sky.h \
         view.h
 
