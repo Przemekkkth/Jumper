@@ -11,7 +11,7 @@ class GameScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit GameScene(QObject *parent = nullptr);
-    ~GameScene();
+    virtual ~GameScene() override;
     void createEnvironment();
     void createPlayer();
     void createUI();

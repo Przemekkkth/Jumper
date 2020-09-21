@@ -13,6 +13,7 @@ class QMediaPlayer;
 class GameSettings
 {
 public:
+    ~GameSettings();
     static GameSettings& instance();
     static void debug();
     static QSize resolutionSize();
@@ -29,6 +30,8 @@ public:
 //Audio
     static void playPlayerJumpSFX();
     static void playPlayerDeathSFX();
+    static void playBGGameAudio();
+    static void stopBGGameAudio();
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;
@@ -54,6 +57,9 @@ private:
     static QMediaPlayer* sBGAudioMedia;
     static QMediaPlayer* sJumpPlayerSFXMedia;
     static QMediaPlayer* sDeathPlayerSFXMedia;
+    static const int sDEFAULT_PLAYER_JUMP_VOLUME;
+    static const int sDEFAULT_PLAYER_DEATH_VOLUME;
+    static const int sDEFAULT_BG_AUDIO_VOLUME;
 };
 
 #endif // GAMESETTINGS_H

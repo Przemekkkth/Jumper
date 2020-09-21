@@ -33,6 +33,7 @@ GameScene::GameScene(QObject *parent) : QGraphicsScene (parent)
     mCactusTimer = new QTimer(this);
     connect(mCactusTimer, &QTimer::timeout, this, &GameScene::setUpCactusSpawner);
     mCactusTimer->start(CACTUST_SPAWN_TIMER);
+    GameSettings::instance().playBGGameAudio();
 }
 
 GameScene::~GameScene()
@@ -130,6 +131,7 @@ void GameScene::setUpCactusSpawner()
     Cactus* cactus = new Cactus();
     connect(cactus, &Cactus::collidedWithPlayer, [this](){
         GameSettings::instance().setGameState(GameSettings::State::Stopped);
+        GameSettings::instance().playPlayerDeathSFX();
         this->mPlayer->freeze();
         this->mCactusTimer->stop();
         this->pauseCacti();
@@ -233,8 +235,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             if(!mPlayer->isJumping() )
             {
                 mPlayer->jump();
-                    GameSettings::instance().playPlayerJumpSFX();
-
+                GameSettings::instance().playPlayerJumpSFX();
             }
         }
     }

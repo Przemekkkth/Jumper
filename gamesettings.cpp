@@ -30,6 +30,16 @@ QString GameSettings::sDeathPlayerSFXFilePath = "qrc:/sfx/sfx/Death01.wav";
 QMediaPlayer* GameSettings::sBGAudioMedia;
 QMediaPlayer* GameSettings::sJumpPlayerSFXMedia;
 QMediaPlayer* GameSettings::sDeathPlayerSFXMedia;
+const int GameSettings::sDEFAULT_PLAYER_JUMP_VOLUME = 75;
+const int GameSettings::sDEFAULT_PLAYER_DEATH_VOLUME = 75;
+const int GameSettings::sDEFAULT_BG_AUDIO_VOLUME = 50;
+
+GameSettings::~GameSettings()
+{
+    delete sJumpPlayerSFXMedia;
+    delete sDeathPlayerSFXMedia;
+    delete sBGAudioMedia;
+}
 
 GameSettings &GameSettings::instance()
 {
@@ -103,6 +113,16 @@ void GameSettings::playPlayerDeathSFX()
     sDeathPlayerSFXMedia->play();
 }
 
+void GameSettings::playBGGameAudio()
+{
+    sBGAudioMedia->play();
+}
+
+void GameSettings::stopBGGameAudio()
+{
+    sBGAudioMedia->stop();
+}
+
 GameSettings::GameSettings()
 {
     init();
@@ -140,4 +160,11 @@ void GameSettings::init()
     //Audio
     sJumpPlayerSFXMedia = new QMediaPlayer();
     sJumpPlayerSFXMedia->setMedia(QUrl(sJumpPlayerSFXFilePath));
+    sJumpPlayerSFXMedia->setVolume(sDEFAULT_PLAYER_JUMP_VOLUME);
+    sDeathPlayerSFXMedia = new QMediaPlayer();
+    sDeathPlayerSFXMedia->setMedia(QUrl(sDeathPlayerSFXFilePath));
+    sDeathPlayerSFXMedia->setVolume(sDEFAULT_PLAYER_DEATH_VOLUME);
+    sBGAudioMedia = new QMediaPlayer();
+    sBGAudioMedia->setMedia(QUrl(sBGAudioFilePath));
+    sBGAudioMedia->setVolume(sDEFAULT_BG_AUDIO_VOLUME);
 }

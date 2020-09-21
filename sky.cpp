@@ -8,7 +8,6 @@ Sky::Sky()
     setPixmap(QPixmap(sPathFile).scaled(int(boundingRect().width()), int(boundingRect().height())));
 }
 
-
 QRectF Sky::boundingRect() const
 {
     qreal x0 = 0;
