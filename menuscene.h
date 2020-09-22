@@ -1,14 +1,15 @@
 #ifndef MENUSCENE_H
 #define MENUSCENE_H
 
-#include <QObject>
+#include <QGraphicsScene>
+#include "button.h"
 
-class MenuScene : public QObject
+class MenuScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
     explicit MenuScene(QObject *parent = nullptr);
-
+    void debug();
 signals:
 
 public slots:
@@ -20,6 +21,7 @@ private:
     int h_Proportion;
     qreal w_Unit;
     qreal h_Unit;
+    Button* mStartButton, *mOptionButton, *mQuitButton;
 };
 
 #endif // MENUSCENE_H

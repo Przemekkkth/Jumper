@@ -25,6 +25,7 @@ QT += multimedia
 CONFIG += c++11
 
 SOURCES += \
+        button.cpp \
         cactus.cpp \
         gamescene.cpp \
         gamesettings.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
         view.cpp
 
 HEADERS += \
+        button.h \
         cactus.h \
         gamescene.h \
         gamesettings.h \

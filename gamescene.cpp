@@ -14,7 +14,7 @@
 #include <QGraphicsSimpleTextItem>
 #include <QTimer>
 
- const int GameScene::CACTUST_SPAWN_TIMER = 1000;
+const int GameScene::CACTUST_SPAWN_TIMER = 1000;
 
 GameScene::GameScene(QObject *parent) : QGraphicsScene (parent)
 {
