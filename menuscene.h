@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include "button.h"
 
+class GameText;
 class MenuScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -22,6 +23,10 @@ private:
     qreal w_Unit;
     qreal h_Unit;
     Button* mStartButton, *mOptionButton, *mQuitButton;
+    GameText* mTitle;
+    // QGraphicsScene interface
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // MENUSCENE_H

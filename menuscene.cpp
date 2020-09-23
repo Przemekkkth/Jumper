@@ -1,7 +1,10 @@
 #include "menuscene.h"
 #include "gamesettings.h"
 #include "button.h"
+#include "gametext.h"
 #include <QDebug>
+#include <QKeyEvent>
+#include <QApplication>
 
 MenuScene::MenuScene(QObject *parent) : QGraphicsScene(parent)
 {
@@ -15,11 +18,21 @@ MenuScene::MenuScene(QObject *parent) : QGraphicsScene(parent)
                  -1*h_Resolution/2,   //y0
                  w_Resolution,         //w0
                  h_Resolution);       //h0
+
+    mTitle = new GameText("Jumper");
+    mTitle->setPen(QPen(QColor(Qt::red)));
+    mTitle->setBrush( QBrush(QColor(252, 132, 3)));
+    addItem(mTitle);
+    mTitle->setPos( QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+2*h_Unit) );
+
     mStartButton = new Button("START");
+    mStartButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+3*h_Unit) );
     addItem(mStartButton);
     mOptionButton = new Button("OPTION");
+    mOptionButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+5*h_Unit));
     addItem(mOptionButton);
     mQuitButton = new Button("QUIT");
+    mQuitButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+7*h_Unit));
     addItem(mQuitButton);
 }
 
@@ -61,4 +74,13 @@ void MenuScene::debug()
         }
     }
 #endif
+}
+
+
+void MenuScene::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Escape)
+    {
+        QApplication::instance()->quit();
+    }
 }

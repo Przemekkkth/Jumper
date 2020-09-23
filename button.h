@@ -13,7 +13,7 @@ public:
     explicit Button(QString text = "");
 
 signals:
-
+    void buttonClicked();
 public slots:
 
 private:
@@ -28,6 +28,10 @@ protected:
     // QGraphicsItem interface
 public:
     virtual QRectF boundingRect() const override;
+
+    // QGraphicsItem interface
+protected:
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 #endif // BUTTON_H
