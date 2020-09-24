@@ -3,7 +3,7 @@
 
 #include <QGraphicsScene>
 #include "button.h"
-
+class QGraphicsPixmapItem;
 class GameText;
 class MenuScene : public QGraphicsScene
 {
@@ -24,7 +24,7 @@ private:
     qreal h_Unit;
     Button* mStartButton, *mOptionButton, *mQuitButton;
     GameText* mTitle;
-    // QGraphicsScene interface
+    QGraphicsPixmapItem* mBackgroundPixmapItem;
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 };

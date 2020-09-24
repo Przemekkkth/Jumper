@@ -30,5 +30,6 @@
     </qresource>
     <qresource prefix="/gui">
         <file>gui/button.png</file>
+        <file>gui/bg.png</file>
     </qresource>
 </RCC>

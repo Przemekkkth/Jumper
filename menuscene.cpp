@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QGraphicsPixmapItem>
+#include <QFontMetrics>
 
 MenuScene::MenuScene(QObject *parent) : QGraphicsScene(parent)
 {
@@ -19,20 +21,30 @@ MenuScene::MenuScene(QObject *parent) : QGraphicsScene(parent)
                  w_Resolution,         //w0
                  h_Resolution);       //h0
 
+    mBackgroundPixmapItem = new QGraphicsPixmapItem();
+    mBackgroundPixmapItem->setPixmap(QPixmap(":/gui/gui/bg.png").scaled(w_Resolution, h_Resolution));
+    addItem(mBackgroundPixmapItem);
+    mBackgroundPixmapItem->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
+
     mTitle = new GameText("Jumper");
     mTitle->setPen(QPen(QColor(Qt::red)));
     mTitle->setBrush( QBrush(QColor(252, 132, 3)));
+    QFont titleFont = mTitle->font();
+    titleFont.setPixelSize(int(1.5*h_Unit));
+    mTitle->setFont(titleFont);
     addItem(mTitle);
-    mTitle->setPos( QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+2*h_Unit) );
+    QFontMetrics titleFontMetrics(titleFont);
+    qreal titleWidth = titleFontMetrics.horizontalAdvance(mTitle->text(), mTitle->text().length());
+    mTitle->setPos( QPointF(-titleWidth/2, -h_Resolution/2+1*h_Unit) );
 
     mStartButton = new Button("START");
-    mStartButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+3*h_Unit) );
+    mStartButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+3*h_Unit+0.5*h_Unit) );
     addItem(mStartButton);
     mOptionButton = new Button("OPTION");
-    mOptionButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+5*h_Unit));
+    mOptionButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+5*h_Unit+0.5*h_Unit));
     addItem(mOptionButton);
     mQuitButton = new Button("QUIT");
-    mQuitButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+7*h_Unit));
+    mQuitButton->setPos(QPointF(-w_Resolution/2+( w_Proportion/2 - 3)*w_Unit, -h_Resolution/2+7*h_Unit+0.5*h_Unit));
     addItem(mQuitButton);
 }
 
