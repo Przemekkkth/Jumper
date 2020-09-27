@@ -1,13 +1,13 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef MAINSCENE_H
+#define MAINSCENE_H
 
 #include <QGraphicsScene>
 
-class Scene : public QGraphicsScene
+class MainScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit Scene(QObject *parent = nullptr);
+    explicit MainScene(QObject *parent = nullptr);
     virtual void debug();
 signals:
 
@@ -23,4 +23,4 @@ protected:
     qreal x0, y0;
 };
 
-#endif // SCENE_H
+#endif // MAINSCENE_H

@@ -3,28 +3,28 @@
 
 #include <QGraphicsScene>
 #include "button.h"
+#include "mainscene.h"
+
 class QGraphicsPixmapItem;
 class GameText;
-class MenuScene : public QGraphicsScene
+class MenuScene : public MainScene
 {
     Q_OBJECT
 public:
     explicit MenuScene(QObject *parent = nullptr);
-    void debug();
 signals:
-
+    void startButtonClicked();
+    void optionsButtonClicked();
+    void quitButtonClicked();
 public slots:
 
 private:
-    int w_Resolution;
-    int h_Resolution;
-    int w_Proportion;
-    int h_Proportion;
-    qreal w_Unit;
-    qreal h_Unit;
     Button* mStartButton, *mOptionButton, *mQuitButton;
     GameText* mTitle;
     QGraphicsPixmapItem* mBackgroundPixmapItem;
+    //Scene *mScene;
+
+    void createConnections();
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 };

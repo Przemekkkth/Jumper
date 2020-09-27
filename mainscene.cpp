@@ -1,9 +1,9 @@
-#include "scene.h"
+#include "mainscene.h"
 #include "gamesettings.h"
 #include <QDebug>
 #include <QGraphicsLineItem>
 
-Scene::Scene(QObject *parent) : QGraphicsScene (parent)
+MainScene::MainScene(QObject *parent) : QGraphicsScene (parent)
 {
     w_Resolution = GameSettings::instance().resolutionSize().width();
     h_Resolution = GameSettings::instance().resolutionSize().height();
@@ -20,7 +20,7 @@ Scene::Scene(QObject *parent) : QGraphicsScene (parent)
 
 }
 
-void Scene::debug()
+void MainScene::debug()
 {
 #ifndef QT_NO_DEBUG
     for(int row = 0; row < h_Proportion; ++row)

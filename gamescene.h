@@ -1,12 +1,13 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <QGraphicsScene>
+#include "mainscene.h"
 class Player;
 class Ground;
 class Sky;
 class GameText;
-class GameScene : public QGraphicsScene
+
+class GameScene : public MainScene
 {
     Q_OBJECT
 public:
@@ -15,10 +16,11 @@ public:
     void createEnvironment();
     void createPlayer();
     void createUI();
-    void debug();
     void addScore(int points);
+    void restartGame();
 signals:
     void setCenterOn(const QPointF pos);
+    void backActionActivated();
 public slots:
     void setUpCactusSpawner();
     // QGraphicsScene interface
@@ -29,7 +31,7 @@ protected:
 private:
     void pauseGame();
     void resumeGame();
-    void restartGame();
+
     void pauseCacti();
     void resumeCacti();
     void removeCacti();
@@ -39,16 +41,12 @@ private:
     Player* mPlayer;
     QVector<Ground*> mGrounds;
     Sky* mSky;
-    int w_Resolution;
-    int h_Resolution;
-    int w_Proportion;
-    int h_Proportion;
-    qreal w_Unit;
-    qreal h_Unit;
     QTimer *mCactusTimer;
     bool mPaused;
     GameText *mPauseText, *mStopText, *mScoreText;
     int mScore;
+
+    void stopGame();
 };
 
 #endif // SCENE_H
