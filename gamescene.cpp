@@ -26,8 +26,6 @@ GameScene::GameScene(QObject *parent) : MainScene (parent)
     createEnvironment();
     createPlayer();
     createUI();
-
-    GameSettings::instance().playBGGameAudio();
     GameSettings::instance().setGameState(GameSettings::State::Stopped);
     stopGame();
 }
@@ -48,7 +46,7 @@ void GameScene::createEnvironment()
     //set pos for groundTiles
     for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
     {
-        mGrounds[i]->setPos(QPointF(-w_Resolution/2 + i*w_Unit - w_Unit, h_Resolution/2 - h_Unit));
+        mGrounds[i]->setPos(QPointF(x0 + i*w_Unit - w_Unit, y0 - h_Unit));
     }
 
     //init sky

@@ -1,17 +1,19 @@
 #ifndef OPTIONSSCENE_H
 #define OPTIONSSCENE_H
+#include "mainscene.h"
+#include "gametext.h"
+#include <QGraphicsProxyWidget>
 
-#include <QObject>
 
-class OptionsScene : public QObject
+class OptionsScene : public MainScene
 {
-    Q_OBJECT
 public:
-    explicit OptionsScene(QObject *parent = nullptr);
-
-signals:
-
-public slots:
+    OptionsScene(QObject* parent = nullptr);
+private:
+    GameText* mTitle;
+    QGraphicsProxyWidget *mAudioSlider, *mSFXSlider;
+    GameText* mAudioSliderText, *mSFXSliderText;
+    QGraphicsProxyWidget *mAudioCheckBox, *mSFXCheckBox;
 };
 
 #endif // OPTIONSSCENE_H

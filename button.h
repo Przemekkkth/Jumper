@@ -24,12 +24,8 @@ private:
     bool mCreated;
 protected:
     QRectF mRect;
-
-    // QGraphicsItem interface
 public:
     virtual QRectF boundingRect() const override;
-
-    // QGraphicsItem interface
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 };
