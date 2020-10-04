@@ -46,13 +46,13 @@ void GameScene::createEnvironment()
     //set pos for groundTiles
     for(int i = 0; i <= GameSettings::instance().proportionSize().width(); ++i)
     {
-        mGrounds[i]->setPos(QPointF(x0 + i*w_Unit - w_Unit, y0 - h_Unit));
+        mGrounds[i]->setPos(QPointF(x0 + i*w_Unit - w_Unit, -y0 - h_Unit));
     }
 
     //init sky
     mSky = new Sky();
     addItem(mSky);
-    mSky->setPos(QPointF(-w_Resolution/2, -h_Resolution/2));
+    mSky->setPos(QPointF(x0, y0));
 }
 
 void GameScene::createPlayer()
@@ -66,17 +66,17 @@ void GameScene::createUI()
 {
     mPauseText = new GameText("Press P to resume");
     addItem(mPauseText);
-    mPauseText->setPos(QPointF(-w_Resolution/2+w_Unit*(w_Proportion/2)-3*w_Unit, -h_Resolution/2+h_Unit));
+    mPauseText->setPos(QPointF(x0 + w_Unit*(w_Proportion/2) - 3*w_Unit, y0 + h_Unit));
     mPauseText->hide();
 
     mStopText = new GameText("Press R to start");
     addItem(mStopText);
-    mStopText->setPos(QPointF(-w_Resolution/2+w_Unit*(w_Proportion/2)-3*w_Unit, -h_Resolution/2+h_Unit));
+    mStopText->setPos(QPointF(x0 + w_Unit*(w_Proportion/2) - 3*w_Unit, y0 + h_Unit));
     mStopText->hide();
 
     mScoreText = new GameText("0");
     mScoreText->setBrush(QBrush( QColor(Qt::blue) ) );
-    mScoreText->setPos( QPointF( w_Resolution/2 - 5*w_Unit, -h_Resolution/2+h_Unit) );
+    mScoreText->setPos( QPointF( x0 - 5*w_Unit, y0 + h_Unit) );
     addItem(mScoreText);
 }
 

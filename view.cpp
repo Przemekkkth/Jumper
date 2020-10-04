@@ -6,6 +6,7 @@ View::View(QWidget *parent) : QGraphicsView (parent)
 {
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //setStyleSheet("QSlider::handle:vertical { height: 10px; background: green;  margin: 0 -4px; /* expand outside the groove */}");
 }
 
 void View::wheelEvent(QWheelEvent *event)

@@ -33,6 +33,19 @@ QMediaPlayer* GameSettings::sDeathPlayerSFXMedia;
 const int GameSettings::sDEFAULT_PLAYER_JUMP_VOLUME = 75;
 const int GameSettings::sDEFAULT_PLAYER_DEATH_VOLUME = 75;
 const int GameSettings::sDEFAULT_BG_AUDIO_VOLUME = 50;
+//StyleSheets
+QString GameSettings::sSliderStyleSheet = "QSlider::groove:horizontal { "
+                                          "border: 1px solid #999999; "
+                                          "height: 32px; "
+                                          "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4); "
+                                          "margin: 2px 0; "
+                                          "} "
+                                          "QSlider::handle:horizontal { "
+                                          "background-image: url(:/gui/gui/coin1.png); "
+                                          "border: 1px solid #5c5c5c; "
+                                          "width: 32px; "
+                                          "height: 32px;"
+                                          "} ";
 
 GameSettings::~GameSettings()
 {

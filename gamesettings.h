@@ -27,6 +27,7 @@ public:
     static QPointF sDefaultPlayerPosition;
     static QFont sGameFont;
     static int sGameFontDefaultSize;
+    static QString sSliderStyleSheet;
 //Audio
     static void playPlayerJumpSFX();
     static void playPlayerDeathSFX();

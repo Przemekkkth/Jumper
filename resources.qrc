@@ -31,5 +31,7 @@
     <qresource prefix="/gui">
         <file>gui/button.png</file>
         <file>gui/bg.png</file>
+        <file>gui/coin1.png</file>
+        <file>gui/coin2.png</file>
     </qresource>
 </RCC>
