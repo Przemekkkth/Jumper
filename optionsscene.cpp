@@ -30,25 +30,35 @@ OptionsScene::OptionsScene(QObject *parent) : MainScene (parent)
     //:/gui/gui/bg.png      qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
     audioSlider->setStyleSheet(GameSettings::sSliderStyleSheet);
     audioSlider->setRange(0, 100);
+    audioSlider->setGeometry(0, 0, 3*int(w_Unit), int(h_Unit)/2);
     mAudioSlider->resize(QSizeF(3*w_Unit, h_Unit/2));
     mAudioSlider->setWidget(audioSlider);
     addItem(mAudioSlider);
-    mAudioSlider->setPos(QPointF(x0 + 7*w_Unit, y0 + 3*h_Unit));
-
+    mAudioSlider->setPos(QPointF(x0 + 7*w_Unit, y0 + 3*h_Unit - h_Unit/8));
 
     mSFXSlider = new QGraphicsProxyWidget();
     QSlider* sfxSlider = new QSlider(Qt::Horizontal);
     sfxSlider->setStyleSheet(GameSettings::sSliderStyleSheet);
     sfxSlider->setRange(0, 100);
+    sfxSlider->setGeometry(0, 0, 3*int(w_Unit), int(h_Unit)/2);
+    mSFXSlider->resize(QSizeF(3*w_Unit, h_Unit));
     mSFXSlider->setWidget(sfxSlider);
     addItem(mSFXSlider);
+    mSFXSlider->setPos(QPointF(x0 + 7*w_Unit, y0 + 4*h_Unit - h_Unit/8));
 
     mAudioSliderText = new GameText("Audio Volume");
     addItem(mAudioSliderText);
     mAudioSliderText->setPos(QPointF(x0 + 2*w_Unit, y0 + 3*h_Unit));
+    mAudioSliderValue = new GameText("100%");
+    addItem(mAudioSliderValue);
+    mAudioSliderValue->setPos(QPointF(x0 + 10*w_Unit, y0 + 3*h_Unit));
+
     mSFXSliderText  = new GameText("SFX Volume");
     addItem(mSFXSliderText);
     mSFXSliderText->setPos(QPointF(x0 + 2*w_Unit, y0 + 4*h_Unit));
+    mSFXSliderValue = new GameText("100%");
+    addItem(mSFXSliderValue);
+    mSFXSliderValue->setPos(QPointF(x0 + 10*w_Unit, y0 + 4*h_Unit));
 
     mAudioCheckBox = new QGraphicsProxyWidget();
     QCheckBox* audioCheckBox = new QCheckBox("Audio Sound");

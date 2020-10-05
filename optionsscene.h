@@ -12,7 +12,7 @@ public:
 private:
     GameText* mTitle;
     QGraphicsProxyWidget *mAudioSlider, *mSFXSlider;
-    GameText* mAudioSliderText, *mSFXSliderText;
+    GameText* mAudioSliderText, *mSFXSliderText, *mAudioSliderValue, *mSFXSliderValue;
     QGraphicsProxyWidget *mAudioCheckBox, *mSFXCheckBox;
     QGraphicsPixmapItem* mBackgroundPixmapItem;
     // QGraphicsScene interface
