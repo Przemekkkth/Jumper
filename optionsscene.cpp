@@ -4,6 +4,7 @@
 #include <QSlider>
 #include <QKeyEvent>
 #include <QApplication>
+#include <QMediaPlayer>
 
 OptionsScene::OptionsScene(QObject *parent) : MainScene (parent)
 {
@@ -31,6 +32,7 @@ OptionsScene::OptionsScene(QObject *parent) : MainScene (parent)
     audioSlider->setStyleSheet(GameSettings::sSliderStyleSheet);
     audioSlider->setRange(0, 100);
     audioSlider->setGeometry(0, 0, 3*int(w_Unit), int(h_Unit)/2);
+    connect(audioSlider, &QSlider::valueChanged, this, &OptionsScene::setAudioSliderValue);
     mAudioSlider->resize(QSizeF(3*w_Unit, h_Unit/2));
     mAudioSlider->setWidget(audioSlider);
     addItem(mAudioSlider);
@@ -41,6 +43,7 @@ OptionsScene::OptionsScene(QObject *parent) : MainScene (parent)
     sfxSlider->setStyleSheet(GameSettings::sSliderStyleSheet);
     sfxSlider->setRange(0, 100);
     sfxSlider->setGeometry(0, 0, 3*int(w_Unit), int(h_Unit)/2);
+    connect(sfxSlider, &QSlider::valueChanged, this, &OptionsScene::setSFXSliderValue);
     mSFXSlider->resize(QSizeF(3*w_Unit, h_Unit));
     mSFXSlider->setWidget(sfxSlider);
     addItem(mSFXSlider);
@@ -60,15 +63,22 @@ OptionsScene::OptionsScene(QObject *parent) : MainScene (parent)
     addItem(mSFXSliderValue);
     mSFXSliderValue->setPos(QPointF(x0 + 10*w_Unit, y0 + 4*h_Unit));
 
+
     mAudioCheckBox = new QGraphicsProxyWidget();
     QCheckBox* audioCheckBox = new QCheckBox("Audio Sound");
+    audioCheckBox->setFont(GameSettings::sGameFont);
+    audioCheckBox->setGeometry(0, 0, 2*int(w_Unit), int(h_Unit)/2);
+    audioCheckBox->setStyleSheet("QCheckBox{background-color: #b5c153;}");
     mAudioCheckBox->setWidget(audioCheckBox);
     addItem(mAudioCheckBox);
+    mAudioCheckBox->setPos(QPointF(x0 + 2*w_Unit, y0 + 5*h_Unit - h_Unit/8));
+
     mSFXCheckBox = new QGraphicsProxyWidget();
     QCheckBox* sfxCheckBox = new QCheckBox("SFX Sound");
-    mAudioCheckBox->setWidget(sfxCheckBox);
-    addItem(mAudioCheckBox);
-
+    mSFXCheckBox->setWidget(sfxCheckBox);
+    sfxCheckBox->setFont(GameSettings::sGameFont);
+    addItem(mSFXCheckBox);
+    mSFXCheckBox->setPos(QPointF(x0 + 2*w_Unit, y0 + 6*h_Unit - h_Unit/8));
 
     debug();
 }
@@ -80,4 +90,18 @@ void OptionsScene::keyPressEvent(QKeyEvent *event)
     {
         QApplication::instance()->quit();
     }
+}
+
+void OptionsScene::setAudioSliderValue(int value)
+{
+    mAudioSliderValue->setText(QString::number(value) + "%");
+    GameSettings::sBGAudioMedia->setVolume(value);
+}
+
+void OptionsScene::setSFXSliderValue(int value)
+{
+    mSFXSliderValue->setText(QString::number(value) + "%");
+
+    GameSettings::sJumpPlayerSFXMedia->setVolume(value);
+    GameSettings::sDeathPlayerSFXMedia->setVolume(value);
 }

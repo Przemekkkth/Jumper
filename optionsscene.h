@@ -18,6 +18,9 @@ private:
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
+public slots:
+    void setAudioSliderValue(int value);
+    void setSFXSliderValue(int value);
 };
 
 #endif // OPTIONSSCENE_H

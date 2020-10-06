@@ -28,11 +28,21 @@ public:
     static QFont sGameFont;
     static int sGameFontDefaultSize;
     static QString sSliderStyleSheet;
-//Audio
+    //Audio
     static void playPlayerJumpSFX();
     static void playPlayerDeathSFX();
     static void playBGGameAudio();
     static void stopBGGameAudio();
+    //Audio
+    static QString sBGAudioFilePath;
+    static QString sJumpPlayerSFXFilePath;
+    static QString sDeathPlayerSFXFilePath;
+    static QMediaPlayer* sBGAudioMedia;
+    static QMediaPlayer* sJumpPlayerSFXMedia;
+    static QMediaPlayer* sDeathPlayerSFXMedia;
+    static const int sDEFAULT_PLAYER_JUMP_VOLUME;
+    static const int sDEFAULT_PLAYER_DEATH_VOLUME;
+    static const int sDEFAULT_BG_AUDIO_VOLUME;
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;
@@ -51,16 +61,7 @@ private:
     static bool sFullScreen;
     static State sState;
     static void init();
-//Audio
-    static QString sBGAudioFilePath;
-    static QString sJumpPlayerSFXFilePath;
-    static QString sDeathPlayerSFXFilePath;
-    static QMediaPlayer* sBGAudioMedia;
-    static QMediaPlayer* sJumpPlayerSFXMedia;
-    static QMediaPlayer* sDeathPlayerSFXMedia;
-    static const int sDEFAULT_PLAYER_JUMP_VOLUME;
-    static const int sDEFAULT_PLAYER_DEATH_VOLUME;
-    static const int sDEFAULT_BG_AUDIO_VOLUME;
+
 };
 
 #endif // GAMESETTINGS_H
