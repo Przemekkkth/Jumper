@@ -49,6 +49,11 @@ QString GameSettings::sSliderStyleSheet = "QSlider::groove:horizontal { "
                                           "height: 32px;"
                                           "} ";
 
+QString GameSettings::sCheckBoxStyleSheet = "QCheckBox{background-color: #b5c153; color: #11ee11 }"
+                                            "QCheckBox::indicator { width: 32px; height: 32px; }"
+                                            "QCheckBox::indicator:unchecked { image: url(:/gui/gui/unchecked.png); }"
+                                            "QCheckBox::indicator:checked { image: url(:/gui/gui/checked.png); }";
+
 GameSettings::~GameSettings()
 {
     delete sJumpPlayerSFXMedia;

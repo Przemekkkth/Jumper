@@ -225,6 +225,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     {
             GameSettings::setGameState(GameSettings::State::Stopped);
             pauseGame();
+            emit backActionActivated();
     }
     else
     {

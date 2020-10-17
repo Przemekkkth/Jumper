@@ -33,6 +33,9 @@ void Button::setRect(QRectF newRect)
     {
         setPixmap( mPixmap.scaled(int(mRect.size().width()), int(mRect.size().height())) );
         mText->setRect(mRect);
+        QFontMetrics fontMetrics(mText->font());
+        mText->setPos(QPointF(boundingRect().center())
+                      - QPointF( qreal( fontMetrics.horizontalAdvance(mText->text(), mText->text().length())) / 2., fontMetrics.height()/2));
     }
 }
 

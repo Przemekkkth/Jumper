@@ -11,7 +11,7 @@ class Button : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     explicit Button(QString text = "");
-
+    void setRect(QRectF newRect);
 signals:
     void buttonClicked();
 public slots:
@@ -20,7 +20,7 @@ private:
     GameText* mText;
     QPixmap mPixmap;
     static const QString sImageFilePath;
-    void setRect(QRectF newRect);
+
     bool mCreated;
 protected:
     QRectF mRect;

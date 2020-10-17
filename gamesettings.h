@@ -28,6 +28,7 @@ public:
     static QFont sGameFont;
     static int sGameFontDefaultSize;
     static QString sSliderStyleSheet;
+    static QString sCheckBoxStyleSheet;
     //Audio
     static void playPlayerJumpSFX();
     static void playPlayerDeathSFX();

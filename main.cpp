@@ -34,7 +34,10 @@ int main(int argc, char *argv[])
         gameScene->restartGame();
         view->setScene(gameScene);
     });
-
+//connect for optionsScene 1) Go to MenuView
+    QObject::connect(optionsScene, &OptionsScene::backActionActivated, [view, menuScene](){
+        view->setScene(menuScene);
+    });
     view->setScene(menuScene);
     GameSettings::instance().setShowMode(view);
     GameSettings::instance().debug();

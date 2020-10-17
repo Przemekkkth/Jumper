@@ -4,9 +4,11 @@
 #include "gametext.h"
 #include <QGraphicsProxyWidget>
 
+class Button;
 
 class OptionsScene : public MainScene
 {
+    Q_OBJECT
 public:
     OptionsScene(QObject* parent = nullptr);
 private:
@@ -15,12 +17,17 @@ private:
     GameText* mAudioSliderText, *mSFXSliderText, *mAudioSliderValue, *mSFXSliderValue;
     QGraphicsProxyWidget *mAudioCheckBox, *mSFXCheckBox;
     QGraphicsPixmapItem* mBackgroundPixmapItem;
-    // QGraphicsScene interface
+    Button* mDefaultButton, *mBackButton;
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
 public slots:
     void setAudioSliderValue(int value);
     void setSFXSliderValue(int value);
+    void setAudioCheckBox(bool on);
+    void setSFXCheckBox(bool on);
+    void setDefaultSettings();
+signals:
+    void backActionActivated();
 };
 
 #endif // OPTIONSSCENE_H
