@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         button.cpp \
         cactus.cpp \
+        coin.cpp \
         gamescene.cpp \
         gamesettings.cpp \
         gametext.cpp \
@@ -42,6 +43,7 @@ SOURCES += \
 HEADERS += \
         button.h \
         cactus.h \
+        coin.h \
         gamescene.h \
         gamesettings.h \
         gametext.h \

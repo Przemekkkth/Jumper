@@ -5,6 +5,7 @@
 #include "sky.h"
 #include "cactus.h"
 #include "gametext.h"
+#include "coin.h"
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -90,13 +91,28 @@ void GameScene::stopGame()
 
 void GameScene::setUpCactusSpawner()
 {
-    Cactus* cactus = new Cactus();
-    connect(cactus, &Cactus::collidedWithPlayer, [this](){
-        GameSettings::instance().setGameState(GameSettings::State::Stopped);
-        GameSettings::instance().playPlayerDeathSFX();
-        stopGame();
-    });
-    addItem(cactus);
+    int random = 2222;
+    if(rand() % 2)
+    {
+        Cactus* cactus = new Cactus();
+        connect(cactus, &Cactus::collidedWithPlayer, [this](){
+            GameSettings::instance().setGameState(GameSettings::State::Stopped);
+            GameSettings::instance().playPlayerDeathSFX();
+            stopGame();
+        });
+        addItem(cactus);
+    }
+    else
+    {
+        Coin* coin = new Coin();
+//        connect(cactus, &Cactus::collidedWithPlayer, [this](){
+//            GameSettings::instance().setGameState(GameSettings::State::Stopped);
+//            GameSettings::instance().playPlayerDeathSFX();
+//            stopGame();
+//        });
+        addItem(coin);
+    }
+
 }
 
 void GameScene::pauseGame()

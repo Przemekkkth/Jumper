@@ -17,6 +17,14 @@
         <file>images/environment/grass3.png</file>
         <file>images/environment/sky.png</file>
         <file>images/environment/cactus1.png</file>
+        <file>images/coin/coin0.png</file>
+        <file>images/coin/coin1.png</file>
+        <file>images/coin/coin2.png</file>
+        <file>images/coin/coin3.png</file>
+        <file>images/coin/coin4.png</file>
+        <file>images/coin/coin5.png</file>
+        <file>images/coin/coin6.png</file>
+        <file>images/coin/coin7.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Blue Sky 8x8 Monospaced.ttf</file>
