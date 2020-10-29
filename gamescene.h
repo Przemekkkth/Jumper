@@ -35,6 +35,10 @@ private:
     void resumeCacti();
     void removeCacti();
 
+    void pauseCoins();
+    void resumeCoins();
+    void removeCoins();
+
     static const int CACTUST_SPAWN_TIMER;
 
     Player* mPlayer;

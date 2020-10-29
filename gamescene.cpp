@@ -86,6 +86,7 @@ void GameScene::stopGame()
     this->mPlayer->freeze();
     this->mCactusTimer->stop();
     this->pauseCacti();
+    this->pauseCoins();
     this->mStopText->show();
 }
 
@@ -127,11 +128,13 @@ void GameScene::pauseGame()
     mPlayer->freeze();
     mPauseText->show();
     pauseCacti();
+    pauseCoins();
 }
 
 void GameScene::resumeGame()
 {
     resumeCacti();
+    resumeCoins();
     mCactusTimer->start();
     mPlayer->unFreeze();
     mPauseText->hide();
@@ -140,6 +143,7 @@ void GameScene::resumeGame()
 void GameScene::restartGame()
 {
     removeCacti();
+    removeCoins();
     mCactusTimer->start();
     mPlayer->reset();
     mStopText->hide();
@@ -184,6 +188,46 @@ void GameScene::removeCacti()
         {
             removeItem(cactus);
             delete cactus;
+        }
+    }
+}
+
+void GameScene::pauseCoins()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Coin* coin = dynamic_cast<Coin*>(allItems[i]);
+        if( coin )
+        {
+            coin->xMovementAnim()->pause();
+        }
+    }
+}
+
+void GameScene::resumeCoins()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Coin* coin = dynamic_cast<Coin*>(allItems[i]);
+        if( coin )
+        {
+            coin->xMovementAnim()->resume();
+        }
+    }
+}
+
+void GameScene::removeCoins()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Coin* coin = dynamic_cast<Coin*>(allItems[i]);
+        if( coin )
+        {
+            removeItem(coin);
+            delete coin;
         }
     }
 }
