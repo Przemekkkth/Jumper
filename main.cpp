@@ -28,13 +28,13 @@ int main(int argc, char *argv[])
     QObject::connect(menuScene, &MenuScene::quitButtonClicked, [](){
         QApplication::instance()->quit();
     });
-//connect for gameScene 1) Go to MenuView
-    QObject::connect(gameScene, &GameScene::backActionActivated, [view, gameScene](){
+//connect for gameScene 1) Go to MenuScene
+    QObject::connect(gameScene, &GameScene::goToMenu, [view, optionsScene, menuScene](){
         GameSettings::instance().setGameState(GameSettings::State::Stopped);
-        gameScene->restartGame();
-        view->setScene(gameScene);
+        view->setScene(optionsScene);
+        view->setScene(menuScene);
     });
-//connect for optionsScene 1) Go to MenuView
+//connect for optionsScene 1) Go to MenuScene
     QObject::connect(optionsScene, &OptionsScene::backActionActivated, [view, menuScene](){
         view->setScene(menuScene);
     });

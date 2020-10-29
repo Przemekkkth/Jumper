@@ -20,13 +20,12 @@ public:
     void restartGame();
 signals:
     void setCenterOn(const QPointF pos);
-    void backActionActivated();
+    void goToMenu();
 public slots:
-    void setUpCactusSpawner();
+    void setUpEntitiesSpawner();
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     virtual void wheelEvent(QGraphicsSceneWheelEvent *event) override;
 private:
     void pauseGame();
@@ -47,6 +46,10 @@ private:
     int mScore;
 
     void stopGame();
+
+    // QGraphicsScene interface
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // SCENE_H

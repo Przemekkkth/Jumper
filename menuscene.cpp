@@ -58,3 +58,9 @@ void MenuScene::keyPressEvent(QKeyEvent *event)
         QApplication::instance()->quit();
     }
 }
+
+void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "MenuScene";
+    MainScene::mousePressEvent(event);
+}

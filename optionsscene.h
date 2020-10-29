@@ -28,6 +28,10 @@ public slots:
     void setDefaultSettings();
 signals:
     void backActionActivated();
+
+    // QGraphicsScene interface
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // OPTIONSSCENE_H

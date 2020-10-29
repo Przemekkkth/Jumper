@@ -27,6 +27,10 @@ private:
     void createConnections();
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
+
+    // QGraphicsScene interface
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
 };
 
 #endif // MENUSCENE_H

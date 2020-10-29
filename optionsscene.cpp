@@ -171,3 +171,9 @@ void OptionsScene::setDefaultSettings()
         sfxCheckBox->setChecked(true);
     }
 }
+
+void OptionsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "OptionsScene";
+    MainScene::mousePressEvent(event);
+}

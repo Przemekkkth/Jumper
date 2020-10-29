@@ -77,7 +77,7 @@ void GameScene::createUI()
 
     mScoreText = new GameText("0");
     mScoreText->setBrush(QBrush( QColor(Qt::blue) ) );
-    mScoreText->setPos( QPointF( x0 - 5*w_Unit, y0 + h_Unit) );
+    mScoreText->setPos( QPointF( x0 + 12*w_Unit, y0 + h_Unit) );
     addItem(mScoreText);
 }
 
@@ -87,6 +87,12 @@ void GameScene::stopGame()
     this->mCactusTimer->stop();
     this->pauseCacti();
     this->mStopText->show();
+}
+
+void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    qDebug() << "GameScene";
+    MainScene::mousePressEvent(event);
 }
 
 void GameScene::setUpEntitiesSpawner()
@@ -137,6 +143,7 @@ void GameScene::restartGame()
     mCactusTimer->start();
     mPlayer->reset();
     mStopText->hide();
+    mPauseText->hide();
     mScoreText->setText("0");
     mScore = 0;
 }
@@ -241,19 +248,11 @@ void GameScene::keyPressEvent(QKeyEvent *event)
     {
             GameSettings::setGameState(GameSettings::State::Stopped);
             pauseGame();
-            emit backActionActivated();
+            emit goToMenu();
     }
     else
     {
          QGraphicsScene::keyPressEvent(event);
-    }
-}
-
-void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        qDebug() << "Mouse clicked at " << event->scenePos();
     }
 }
 
