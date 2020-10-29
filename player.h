@@ -38,6 +38,7 @@ private:
     QPixmap mJumpPixmap;
     QPropertyAnimation *mJumpUpAnim, *mJumpDownAnim;
     qreal m_y;
+    qreal mJumpHeight;
     // QGraphicsItem interface
 public:
     virtual QRectF boundingRect() const override;

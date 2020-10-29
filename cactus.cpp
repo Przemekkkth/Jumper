@@ -9,7 +9,7 @@
 
 
 QString Cactus::sPathFile = ":/environment/images/environment/cactus1.png";
-const int Cactus::TIME_OF_THE_ROAD = 2000;
+const int Cactus::TIME_OF_THE_ROAD = 4400;
 const int Cactus::SCORE_POINTS = 11;
 
 Cactus::Cactus()

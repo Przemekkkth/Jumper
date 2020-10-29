@@ -31,6 +31,7 @@ Player::Player(QString pathFile)
 
     mJumpUpAnim = new QPropertyAnimation(this,"y",this);
     mJumpDownAnim = new QPropertyAnimation(this,"y",this);
+    mJumpHeight = GameSettings::instance().unitSize().height()*1.5;
 }
 
 void Player::updatePixmap()
@@ -76,7 +77,7 @@ void Player::jump()
 {
     mIsJumping = true;
     mJumpUpAnim->setStartValue(y());
-    mJumpUpAnim->setEndValue(y() - GameSettings::instance().unitSize().height());
+    mJumpUpAnim->setEndValue(y() - mJumpHeight);
     mJumpUpAnim->setEasingCurve(QEasingCurve::OutQuad);
     mJumpUpAnim->setDuration(250);
     mJumpUpAnim->start();
@@ -88,7 +89,7 @@ void Player::jump()
 void Player::fall()
 {
     mJumpDownAnim->setStartValue(y());
-    mJumpDownAnim->setEndValue(y() + GameSettings::instance().unitSize().height());
+    mJumpDownAnim->setEndValue(y() + mJumpHeight);
     mJumpDownAnim->setEasingCurve(QEasingCurve::InQuad);
     mJumpDownAnim->setDuration(250);
     mJumpDownAnim->start();

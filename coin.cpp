@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QTimer>
 
-const int Coin::TIME_OF_THE_ROAD = 2000;
+const int Coin::TIME_OF_THE_ROAD = 4000;
 const int Coin::SCORE_POINTS = 10;
 QStringList Coin::PATH_FILES = {
                                 ":/environment/images/coin/coin0.png", ":/environment/images/coin/coin1.png",

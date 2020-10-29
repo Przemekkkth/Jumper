@@ -22,7 +22,7 @@ GameScene::GameScene(QObject *parent) : MainScene (parent)
     mPaused = false;
     mScore = 0;
     mCactusTimer = new QTimer(this);
-    connect(mCactusTimer, &QTimer::timeout, this, &GameScene::setUpCactusSpawner);
+    connect(mCactusTimer, &QTimer::timeout, this, &GameScene::setUpEntitiesSpawner);
     mCactusTimer->start(CACTUST_SPAWN_TIMER);
     createEnvironment();
     createPlayer();
@@ -89,10 +89,10 @@ void GameScene::stopGame()
     this->mStopText->show();
 }
 
-void GameScene::setUpCactusSpawner()
+void GameScene::setUpEntitiesSpawner()
 {
-    int random = 2222;
-    if(rand() % 2)
+    static int r = 0;
+    if(r % 2)
     {
         Cactus* cactus = new Cactus();
         connect(cactus, &Cactus::collidedWithPlayer, [this](){
@@ -112,7 +112,7 @@ void GameScene::setUpCactusSpawner()
 //        });
         addItem(coin);
     }
-
+    r++;
 }
 
 void GameScene::pauseGame()
