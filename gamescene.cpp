@@ -112,11 +112,11 @@ void GameScene::setUpEntitiesSpawner()
     else
     {
         Coin* coin = new Coin();
-//        connect(cactus, &Cactus::collidedWithPlayer, [this](){
-//            GameSettings::instance().setGameState(GameSettings::State::Stopped);
-//            GameSettings::instance().playPlayerDeathSFX();
-//            stopGame();
-//        });
+        connect(coin, &Coin::collidedWithPlayer, [this, coin](){
+            this->addScore(Coin::SCORE_POINTS);
+            this->removeItem(coin);
+            delete coin;
+        });
         addItem(coin);
     }
     r++;

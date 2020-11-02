@@ -11,6 +11,7 @@ class Coin : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
 public:
+    static const int SCORE_POINTS;
     Coin();
     static QString sPathFile;
     virtual QRectF boundingRect() const override;
@@ -32,7 +33,7 @@ private:
     bool mPastPlayer;
     unsigned int mCurrentFrame;
     QTimer* mTimer;
-    static const int SCORE_POINTS;
+
     static QStringList PATH_FILES;
     static int COUNT_OF_FILES;
     static const int sChangeFramesMilliseconds;
