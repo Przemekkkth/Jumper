@@ -17,7 +17,8 @@ Arrow::Arrow()
     m_xRandomizer = QRandomGenerator::global()->bounded(int(3*GameSettings::instance().unitSize().width()));
     mX_MovementAnim = new QPropertyAnimation(this, "x", this);
     setPos(QPointF(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer,
-                   GameSettings::instance().resolutionSize().height()/2 - GameSettings::instance().unitSize().height() - height()));
+                   GameSettings::instance().resolutionSize().height()/2 - GameSettings::instance().unitSize().height() - height() - GameSettings::instance().unitSize().height())
+           );
     mX_MovementAnim->setStartValue(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer);
     mX_MovementAnim->setEndValue(-GameSettings::instance().resolutionSize().width()/2 - GameSettings::instance().unitSize().width() );
     mX_MovementAnim->setEasingCurve(QEasingCurve::Linear);

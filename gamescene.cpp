@@ -6,6 +6,7 @@
 #include "cactus.h"
 #include "gametext.h"
 #include "coin.h"
+#include "arrow.h"
 
 #include <QKeyEvent>
 #include <QApplication>
@@ -99,7 +100,7 @@ void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void GameScene::setUpEntitiesSpawner()
 {
     static int r = 0;
-    if(r % 2)
+    if(r % 3)
     {
         Cactus* cactus = new Cactus();
         connect(cactus, &Cactus::collidedWithPlayer, [this](){
@@ -108,6 +109,16 @@ void GameScene::setUpEntitiesSpawner()
             stopGame();
         });
         addItem(cactus);
+    }
+    else if(r % 2 )
+    {
+        Arrow* arrow = new Arrow();
+        connect(arrow, &Arrow::collidedWithPlayer, [this](){
+            GameSettings::instance().setGameState(GameSettings::State::Stopped);
+            GameSettings::instance().playPlayerDeathSFX();
+            stopGame();
+        });
+        addItem(arrow);
     }
     else
     {
@@ -127,14 +138,18 @@ void GameScene::pauseGame()
     mCactusTimer->stop();
     mPlayer->freeze();
     mPauseText->show();
+
     pauseCacti();
     pauseCoins();
+    pauseArrows();
 }
 
 void GameScene::resumeGame()
 {
     resumeCacti();
     resumeCoins();
+    resumeArrows();
+
     mCactusTimer->start();
     mPlayer->unFreeze();
     mPauseText->hide();
@@ -144,6 +159,8 @@ void GameScene::restartGame()
 {
     removeCacti();
     removeCoins();
+    removeArrows();
+
     mCactusTimer->start();
     mPlayer->reset();
     mStopText->hide();
@@ -228,6 +245,46 @@ void GameScene::removeCoins()
         {
             removeItem(coin);
             delete coin;
+        }
+    }
+}
+
+void GameScene::pauseArrows()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Arrow* arrow = dynamic_cast<Arrow*>(allItems[i]);
+        if( arrow )
+        {
+            arrow->xMovementAnim()->pause();
+        }
+    }
+}
+
+void GameScene::resumeArrows()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Arrow* arrow = dynamic_cast<Arrow*>(allItems[i]);
+        if( arrow )
+        {
+            arrow->xMovementAnim()->resume();
+        }
+    }
+}
+
+void GameScene::removeArrows()
+{
+    QList<QGraphicsItem*> allItems = items();
+    for(int i = 0; i < allItems.size(); ++i)
+    {
+        Arrow* arrow = dynamic_cast<Arrow*>(allItems[i]);
+        if( arrow )
+        {
+            removeItem(arrow);
+            delete arrow;
         }
     }
 }

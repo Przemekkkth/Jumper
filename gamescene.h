@@ -30,6 +30,7 @@ protected:
 private:
     void pauseGame();
     void resumeGame();
+    void stopGame();
 
     void pauseCacti();
     void resumeCacti();
@@ -38,6 +39,10 @@ private:
     void pauseCoins();
     void resumeCoins();
     void removeCoins();
+
+    void pauseArrows();
+    void resumeArrows();
+    void removeArrows();
 
     static const int CACTUST_SPAWN_TIMER;
 
@@ -48,9 +53,6 @@ private:
     bool mPaused;
     GameText *mPauseText, *mStopText, *mScoreText;
     int mScore;
-
-    void stopGame();
-
     // QGraphicsScene interface
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
