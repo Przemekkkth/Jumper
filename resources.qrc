@@ -25,6 +25,7 @@
         <file>images/coin/coin5.png</file>
         <file>images/coin/coin6.png</file>
         <file>images/coin/coin7.png</file>
+        <file>images/arrow/arrow.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>fonts/Blue Sky 8x8 Monospaced.ttf</file>

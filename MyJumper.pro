@@ -25,6 +25,7 @@ QT += multimedia
 CONFIG += c++11
 
 SOURCES += \
+        arrow.cpp \
         button.cpp \
         cactus.cpp \
         coin.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
         view.cpp
 
 HEADERS += \
+        arrow.h \
         button.h \
         cactus.h \
         coin.h \
