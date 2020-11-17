@@ -36,6 +36,7 @@
     <qresource prefix="/sfx">
         <file>sfx/Death01.wav</file>
         <file>sfx/Retro_8-Bit_Game-Jump_Lift_TakeOff_07.wav</file>
+        <file>sfx/Retro_8-Bit_Game-Pickup_Object_Item_Coin_01.wav</file>
     </qresource>
     <qresource prefix="/gui">
         <file>gui/button.png</file>

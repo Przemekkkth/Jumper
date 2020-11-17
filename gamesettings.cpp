@@ -6,6 +6,7 @@
 #include <QFontDatabase>
 #include <QSoundEffect>
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -27,11 +28,15 @@ int GameSettings::sGameFontDefaultSize = 25;
 QString GameSettings::sBGAudioFilePath = "qrc:/audio/audio/Around the Bend 100 BPM.wav";
 QString GameSettings::sJumpPlayerSFXFilePath = "qrc:/sfx/sfx/Retro_8-Bit_Game-Jump_Lift_TakeOff_07.wav";
 QString GameSettings::sDeathPlayerSFXFilePath = "qrc:/sfx/sfx/Death01.wav";
+QString GameSettings::sPickUpCoinSFXFilePath = "qrc:/sfx/sfx/Retro_8-Bit_Game-Pickup_Object_Item_Coin_01.wav";
+QMediaPlaylist* GameSettings::sMediaPlaylist;
 QMediaPlayer* GameSettings::sBGAudioMedia;
 QMediaPlayer* GameSettings::sJumpPlayerSFXMedia;
 QMediaPlayer* GameSettings::sDeathPlayerSFXMedia;
+QMediaPlayer* GameSettings::sPickUpCoinSFXMedia;
 const int GameSettings::sDEFAULT_PLAYER_JUMP_VOLUME = 75;
 const int GameSettings::sDEFAULT_PLAYER_DEATH_VOLUME = 75;
+const int GameSettings::sDEFAULT_PICK_UP_COIN_VOLUME = 75;
 const int GameSettings::sDEFAULT_BG_AUDIO_VOLUME = 50;
 //StyleSheets
 QString GameSettings::sSliderStyleSheet = "QSlider::groove:horizontal { "
@@ -58,6 +63,7 @@ GameSettings::~GameSettings()
 {
     delete sJumpPlayerSFXMedia;
     delete sDeathPlayerSFXMedia;
+    delete sPickUpCoinSFXMedia;
     delete sBGAudioMedia;
 }
 
@@ -133,6 +139,11 @@ void GameSettings::playPlayerDeathSFX()
     sDeathPlayerSFXMedia->play();
 }
 
+void GameSettings::playPickUpCoinSFX()
+{
+    sPickUpCoinSFXMedia->play();
+}
+
 void GameSettings::playBGGameAudio()
 {
     sBGAudioMedia->play();
@@ -184,7 +195,14 @@ void GameSettings::init()
     sDeathPlayerSFXMedia = new QMediaPlayer();
     sDeathPlayerSFXMedia->setMedia(QUrl(sDeathPlayerSFXFilePath));
     sDeathPlayerSFXMedia->setVolume(sDEFAULT_PLAYER_DEATH_VOLUME);
+    sPickUpCoinSFXMedia = new QMediaPlayer();
+    sPickUpCoinSFXMedia->setMedia(QUrl(sPickUpCoinSFXFilePath));
+    sPickUpCoinSFXMedia->setVolume(sDEFAULT_PICK_UP_COIN_VOLUME);
+
+    sMediaPlaylist = new QMediaPlaylist();
+    sMediaPlaylist->addMedia(QUrl(sBGAudioFilePath));
+    sMediaPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
     sBGAudioMedia = new QMediaPlayer();
-    sBGAudioMedia->setMedia(QUrl(sBGAudioFilePath));
+    sBGAudioMedia->setPlaylist(sMediaPlaylist);
     sBGAudioMedia->setVolume(sDEFAULT_BG_AUDIO_VOLUME);
 }

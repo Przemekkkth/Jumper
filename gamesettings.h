@@ -5,7 +5,7 @@
 #include <QPointF>
 #include <QFont>
 
-
+class QMediaPlaylist;
 class QGraphicsLineItem;
 class QWidget;
 class QMediaPlayer;
@@ -32,18 +32,23 @@ public:
     //Audio
     static void playPlayerJumpSFX();
     static void playPlayerDeathSFX();
+    static void playPickUpCoinSFX();
     static void playBGGameAudio();
     static void stopBGGameAudio();
     //Audio
+    static QMediaPlaylist* sMediaPlaylist;
     static QString sBGAudioFilePath;
     static QString sJumpPlayerSFXFilePath;
     static QString sDeathPlayerSFXFilePath;
+    static QString sPickUpCoinSFXFilePath;
     static QMediaPlayer* sBGAudioMedia;
     static QMediaPlayer* sJumpPlayerSFXMedia;
     static QMediaPlayer* sDeathPlayerSFXMedia;
+    static QMediaPlayer* sPickUpCoinSFXMedia;
     static const int sDEFAULT_PLAYER_JUMP_VOLUME;
     static const int sDEFAULT_PLAYER_DEATH_VOLUME;
     static const int sDEFAULT_BG_AUDIO_VOLUME;
+    static const int sDEFAULT_PICK_UP_COIN_VOLUME;
 private:
     GameSettings();
     GameSettings(const GameSettings&) = delete;

@@ -88,6 +88,7 @@ void GameScene::stopGame()
     this->mCactusTimer->stop();
     this->pauseCacti();
     this->pauseCoins();
+    this->pauseArrows();
     this->mStopText->show();
 }
 
@@ -124,6 +125,7 @@ void GameScene::setUpEntitiesSpawner()
     {
         Coin* coin = new Coin();
         connect(coin, &Coin::collidedWithPlayer, [this, coin](){
+            GameSettings::instance().playPickUpCoinSFX();
             this->addScore(Coin::SCORE_POINTS);
             this->removeItem(coin);
             delete coin;
