@@ -49,7 +49,7 @@ private:
     Player* mPlayer;
     QVector<Ground*> mGrounds;
     Sky* mSky;
-    QTimer *mCactusTimer;
+    QTimer *mEntitySpawnTimer;
     bool mPaused;
     GameText *mPauseText, *mStopText, *mScoreText;
     int mScore;

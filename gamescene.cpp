@@ -15,6 +15,8 @@
 #include <QGraphicsLineItem>
 #include <QGraphicsSimpleTextItem>
 #include <QTimer>
+#include <QDateTime>
+#include <QRandomGenerator>
 
 const int GameScene::CACTUST_SPAWN_TIMER = 1000;
 
@@ -22,9 +24,9 @@ GameScene::GameScene(QObject *parent) : MainScene (parent)
 {
     mPaused = false;
     mScore = 0;
-    mCactusTimer = new QTimer(this);
-    connect(mCactusTimer, &QTimer::timeout, this, &GameScene::setUpEntitiesSpawner);
-    mCactusTimer->start(CACTUST_SPAWN_TIMER);
+    mEntitySpawnTimer = new QTimer(this);
+    connect(mEntitySpawnTimer, &QTimer::timeout, this, &GameScene::setUpEntitiesSpawner);
+    mEntitySpawnTimer->start(CACTUST_SPAWN_TIMER);
     createEnvironment();
     createPlayer();
     createUI();
@@ -85,7 +87,7 @@ void GameScene::createUI()
 void GameScene::stopGame()
 {
     this->mPlayer->freeze();
-    this->mCactusTimer->stop();
+    this->mEntitySpawnTimer->stop();
     this->pauseCacti();
     this->pauseCoins();
     this->pauseArrows();
@@ -100,8 +102,8 @@ void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void GameScene::setUpEntitiesSpawner()
 {
-    static int r = 0;
-    if(r % 3)
+    quint32 randomValue = QRandomGenerator::global()->bounded(3);
+    if(randomValue == 2)
     {
         Cactus* cactus = new Cactus();
         connect(cactus, &Cactus::collidedWithPlayer, [this](){
@@ -111,7 +113,7 @@ void GameScene::setUpEntitiesSpawner()
         });
         addItem(cactus);
     }
-    else if(r % 2 )
+    else if(randomValue == 1)
     {
         Arrow* arrow = new Arrow();
         connect(arrow, &Arrow::collidedWithPlayer, [this](){
@@ -132,12 +134,11 @@ void GameScene::setUpEntitiesSpawner()
         });
         addItem(coin);
     }
-    r++;
 }
 
 void GameScene::pauseGame()
 {
-    mCactusTimer->stop();
+    mEntitySpawnTimer->stop();
     mPlayer->freeze();
     mPauseText->show();
 
@@ -152,7 +153,7 @@ void GameScene::resumeGame()
     resumeCoins();
     resumeArrows();
 
-    mCactusTimer->start();
+    mEntitySpawnTimer->start();
     mPlayer->unFreeze();
     mPauseText->hide();
 }
@@ -163,7 +164,7 @@ void GameScene::restartGame()
     removeCoins();
     removeArrows();
 
-    mCactusTimer->start();
+    mEntitySpawnTimer->start();
     mPlayer->reset();
     mStopText->hide();
     mPauseText->hide();
