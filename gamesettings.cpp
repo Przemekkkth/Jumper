@@ -141,7 +141,12 @@ void GameSettings::playPlayerDeathSFX()
 
 void GameSettings::playPickUpCoinSFX()
 {
-    sPickUpCoinSFXMedia->play();
+    if (sPickUpCoinSFXMedia->state() == QMediaPlayer::PlayingState){
+        sPickUpCoinSFXMedia->setPosition(0);
+    }
+    else if (sPickUpCoinSFXMedia->state() == QMediaPlayer::StoppedState){
+        sPickUpCoinSFXMedia->play();
+    }
 }
 
 void GameSettings::playBGGameAudio()
