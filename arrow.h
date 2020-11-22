@@ -10,7 +10,7 @@ class Arrow :  public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
 public:
-    Arrow();
+    Arrow( int TIME = TIME_OF_THE_ROAD);
     static QString sPathFile;
     virtual QRectF boundingRect() const override;
     qreal x() const;

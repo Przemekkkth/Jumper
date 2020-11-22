@@ -127,6 +127,7 @@ void OptionsScene::setSFXSliderValue(int value)
     mSFXSliderValue->setText(QString::number(value) + "%");
     GameSettings::sJumpPlayerSFXMedia->setVolume(value);
     GameSettings::sDeathPlayerSFXMedia->setVolume(value);
+    GameSettings::sPickUpCoinSFXMedia->setVolume(value);
 }
 
 void OptionsScene::setAudioCheckBox(bool on)
@@ -143,6 +144,7 @@ void OptionsScene::setSFXCheckBox(bool on)
 {
     GameSettings::sJumpPlayerSFXMedia->setMuted(on);
     GameSettings::sDeathPlayerSFXMedia->setMuted(on);
+    GameSettings::sPickUpCoinSFXMedia->setMuted(on);
 }
 
 void OptionsScene::setDefaultSettings()

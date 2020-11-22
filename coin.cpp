@@ -9,7 +9,7 @@
 #include <QTimer>
 
 const int Coin::TIME_OF_THE_ROAD = 4000;
-const int Coin::SCORE_POINTS = 10;
+const int Coin::SCORE_POINTS = 50;
 QStringList Coin::PATH_FILES = {
                                 ":/environment/images/coin/coin0.png", ":/environment/images/coin/coin1.png",
                                 ":/environment/images/coin/coin2.png", ":/environment/images/coin/coin3.png",
@@ -19,7 +19,7 @@ QStringList Coin::PATH_FILES = {
 int Coin::COUNT_OF_FILES = Coin::PATH_FILES.size();
 const int Coin::sChangeFramesMilliseconds = 125;
 
-Coin::Coin()
+Coin::Coin(int Time)
 {
     mCurrentFrame = 0;
     setPixmap(QPixmap(PATH_FILES[mCurrentFrame]).scaled(int(boundingRect().width()), int(boundingRect().height())));
@@ -30,7 +30,7 @@ Coin::Coin()
     mX_MovementAnim->setStartValue(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer);
     mX_MovementAnim->setEndValue(-GameSettings::instance().resolutionSize().width()/2 - GameSettings::instance().unitSize().width() );
     mX_MovementAnim->setEasingCurve(QEasingCurve::Linear);
-    mX_MovementAnim->setDuration(TIME_OF_THE_ROAD);
+    mX_MovementAnim->setDuration(Time);
     mX_MovementAnim->start();
     //delete object
     connect( mX_MovementAnim, &QPropertyAnimation::finished, [this](){

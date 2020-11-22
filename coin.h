@@ -12,7 +12,7 @@ class Coin : public QObject, public QGraphicsPixmapItem
     Q_PROPERTY(qreal x READ x WRITE setX)
 public:
     static const int SCORE_POINTS;
-    Coin();
+    Coin(int Time = TIME_OF_THE_ROAD);
     static QString sPathFile;
     virtual QRectF boundingRect() const override;
     qreal x() const;

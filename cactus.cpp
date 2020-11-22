@@ -10,9 +10,9 @@
 
 QString Cactus::sPathFile = ":/environment/images/environment/cactus1.png";
 const int Cactus::TIME_OF_THE_ROAD = 4400;
-const int Cactus::SCORE_POINTS = 11;
+const int Cactus::SCORE_POINTS = 20;
 
-Cactus::Cactus()
+Cactus::Cactus(int Time)
 {
     setPixmap(QPixmap(sPathFile).scaled(int(boundingRect().width()), int(boundingRect().height())));
     m_xRandomizer = QRandomGenerator::global()->bounded(int(3*GameSettings::instance().unitSize().width()));
@@ -22,7 +22,7 @@ Cactus::Cactus()
     mX_MovementAnim->setStartValue(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer);
     mX_MovementAnim->setEndValue(-GameSettings::instance().resolutionSize().width()/2 - GameSettings::instance().unitSize().width() );
     mX_MovementAnim->setEasingCurve(QEasingCurve::Linear);
-    mX_MovementAnim->setDuration(TIME_OF_THE_ROAD);
+    mX_MovementAnim->setDuration(Time);
     mX_MovementAnim->start();
     //delete object
     connect( mX_MovementAnim, &QPropertyAnimation::finished, [this](){

@@ -9,9 +9,9 @@
 
 QString Arrow::sPathFile = ":/environment/images/arrow/arrow.png";
 const int Arrow::TIME_OF_THE_ROAD = 4400;
-const int Arrow::SCORE_POINTS = 11;
+const int Arrow::SCORE_POINTS = 20;
 
-Arrow::Arrow()
+Arrow::Arrow(int TIME)
 {
     setPixmap(QPixmap(sPathFile).scaled(int(boundingRect().width()), int(boundingRect().height())));
     m_xRandomizer = QRandomGenerator::global()->bounded(int(3*GameSettings::instance().unitSize().width()));
@@ -22,7 +22,7 @@ Arrow::Arrow()
     mX_MovementAnim->setStartValue(GameSettings::instance().resolutionSize().width()/2 + m_xRandomizer);
     mX_MovementAnim->setEndValue(-GameSettings::instance().resolutionSize().width()/2 - GameSettings::instance().unitSize().width() );
     mX_MovementAnim->setEasingCurve(QEasingCurve::Linear);
-    mX_MovementAnim->setDuration(TIME_OF_THE_ROAD);
+    mX_MovementAnim->setDuration(TIME);
     mX_MovementAnim->start();
     //delete object
     connect( mX_MovementAnim, &QPropertyAnimation::finished, [this](){

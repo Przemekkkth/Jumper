@@ -9,7 +9,7 @@ class Cactus : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
     Q_PROPERTY(qreal x READ x WRITE setX)
 public:
-    Cactus();
+    Cactus(int Time = TIME_OF_THE_ROAD);
     static QString sPathFile;
     virtual QRectF boundingRect() const override;
     qreal x() const;

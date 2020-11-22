@@ -19,6 +19,7 @@
 #include <QRandomGenerator>
 
 const int GameScene::CACTUST_SPAWN_TIMER = 1000;
+const int GameScene::TIME_OF_ENTITY_ROAD = 4400;
 
 GameScene::GameScene(QObject *parent) : MainScene (parent)
 {
@@ -103,9 +104,15 @@ void GameScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void GameScene::setUpEntitiesSpawner()
 {
     quint32 randomValue = QRandomGenerator::global()->bounded(3);
+    int timeOfRoad = TIME_OF_ENTITY_ROAD - mScore;
+    if( timeOfRoad < 1000 )
+    {
+        timeOfRoad = 1000;
+    }
+    qDebug() << "timeOfRoad " << timeOfRoad;
     if(randomValue == 2)
     {
-        Cactus* cactus = new Cactus();
+        Cactus* cactus = new Cactus(timeOfRoad);
         connect(cactus, &Cactus::collidedWithPlayer, [this](){
             GameSettings::instance().setGameState(GameSettings::State::Stopped);
             GameSettings::instance().playPlayerDeathSFX();
@@ -115,7 +122,7 @@ void GameScene::setUpEntitiesSpawner()
     }
     else if(randomValue == 1)
     {
-        Arrow* arrow = new Arrow();
+        Arrow* arrow = new Arrow(timeOfRoad);
         connect(arrow, &Arrow::collidedWithPlayer, [this](){
             GameSettings::instance().setGameState(GameSettings::State::Stopped);
             GameSettings::instance().playPlayerDeathSFX();
@@ -125,7 +132,7 @@ void GameScene::setUpEntitiesSpawner()
     }
     else
     {
-        Coin* coin = new Coin();
+        Coin* coin = new Coin(timeOfRoad);
         connect(coin, &Coin::collidedWithPlayer, [this, coin](){
             GameSettings::instance().playPickUpCoinSFX();
             this->addScore(Coin::SCORE_POINTS);

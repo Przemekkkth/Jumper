@@ -45,6 +45,7 @@ private:
     void removeArrows();
 
     static const int CACTUST_SPAWN_TIMER;
+    static const int TIME_OF_ENTITY_ROAD;
 
     Player* mPlayer;
     QVector<Ground*> mGrounds;
