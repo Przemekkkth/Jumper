@@ -7,6 +7,8 @@
 #include <QSoundEffect>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QScreen>
+#include <QApplication>
 
 QString GameSettings::sResolutionStr;
 QSize GameSettings::sResolution;
@@ -172,10 +174,11 @@ void GameSettings::init()
     sGameFont.setFamily(family);
     sGameFont.setPixelSize(sGameFontDefaultSize);
     //Resolution
+    QSize screenSize = QApplication::screens()[0]->size();
     sResolutionStr = "1366x768";
     int width = sResolutionStr.split("x").at(0).toInt();
     int height = sResolutionStr.split("x").at(1).toInt();
-    sResolution = QSize(width, height);
+    sResolution = screenSize;
     sWidth = sResolution.width();
     sHeight = sResolution.height();
     //Proportion

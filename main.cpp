@@ -7,9 +7,11 @@
 #include "mainscene.h"
 #include "optionsscene.h"
 
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
    //a.setStyleSheet("QSlider { background-color: yellow } QSlider::handle{ background-image: url(:/gui/gui/coin1.png); width: 32px; height: 32px;}" );
     GameSettings::instance().playBGGameAudio();
     View *view = new View();
