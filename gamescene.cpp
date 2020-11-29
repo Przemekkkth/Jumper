@@ -141,6 +141,9 @@ void GameScene::setUpEntitiesSpawner()
         });
         addItem(coin);
     }
+    //change interval for randomness
+    int newInterval = QRandomGenerator::global()->bounded(500) - 250 - (mScore / 10);
+    mEntitySpawnTimer->setInterval(CACTUST_SPAWN_TIMER + newInterval);
 }
 
 void GameScene::pauseGame()

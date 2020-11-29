@@ -9,7 +9,7 @@
 #include <QTimer>
 
 const int Coin::TIME_OF_THE_ROAD = 4000;
-const int Coin::SCORE_POINTS = 50;
+const int Coin::SCORE_POINTS = 75;
 QStringList Coin::PATH_FILES = {
                                 ":/environment/images/coin/coin0.png", ":/environment/images/coin/coin1.png",
                                 ":/environment/images/coin/coin2.png", ":/environment/images/coin/coin3.png",

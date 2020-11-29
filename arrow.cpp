@@ -9,7 +9,7 @@
 
 QString Arrow::sPathFile = ":/environment/images/arrow/arrow.png";
 const int Arrow::TIME_OF_THE_ROAD = 4400;
-const int Arrow::SCORE_POINTS = 20;
+const int Arrow::SCORE_POINTS = 50;
 
 Arrow::Arrow(int TIME)
 {
