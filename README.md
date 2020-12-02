@@ -5,3 +5,10 @@ Protagonist should collect coins which give more points. Main goal is get as man
 ## Gameplay
 ![alt text](https://user-images.githubusercontent.com/28188300/100883739-f7ba4400-34b0-11eb-8f50-d89d73c7ea6a.gif)
 ## Screenshots
+![alt text](https://user-images.githubusercontent.com/28188300/100928092-1555d080-34e6-11eb-8001-e98e135eb314.png)
+![alt text](https://user-images.githubusercontent.com/28188300/100883792-06a0f680-34b1-11eb-96dd-068bde96f7dc.png)
+## Requirements
+Project is created with :
+* Qt >= 5.11
+* Qt Multimedia
+## Build
