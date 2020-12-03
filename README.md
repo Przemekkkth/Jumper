@@ -9,6 +9,15 @@ Protagonist should collect coins which give more points. Main goal is get as man
 ![alt text](https://user-images.githubusercontent.com/28188300/100883792-06a0f680-34b1-11eb-96dd-068bde96f7dc.png)
 ## Requirements
 Project is created with :
-* Qt >= 5.11
-* Qt Multimedia
+* [Qt](https://www.qt.io/qt5-11) >= 5.11
+* [Qt Multimedia](https://doc.qt.io/qt-5/qtmultimedia-index.html)
 ## Build
+To run game
+'''
+qmake
+make
+'''
+## To do
+- [x] Finish first version, working game
+- [ ] Add scrolling sky and ground
+- [ ] Add crouch for player to avoid arrow 
