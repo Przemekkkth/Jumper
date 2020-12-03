@@ -13,10 +13,10 @@ Project is created with :
 * [Qt Multimedia](https://doc.qt.io/qt-5/qtmultimedia-index.html)
 ## Build
 To run game
-'''
+```
 qmake
 make
-'''
+```
 ## To do
 - [x] Finish first version, working game
 - [ ] Add scrolling sky and ground
